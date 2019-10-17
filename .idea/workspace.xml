@@ -2,7 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4ff6dacf-022f-41ea-a5a8-c231ccc78239" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/js/controls/MouseLookController.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/lib/Utilities.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/loaders/MTLLoader.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/loaders/OBJLoader.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/materials/ShaderCustomiser.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/materials/TextureSplattingMaterial.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/terrain/TerrainBufferGeometry.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/images/heightmap.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/images/splatmap_01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/textures/grass_01.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/textures/grass_02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/textures/rock_01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/textures/rock_02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/textures/rock_03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/res/textures/snowy_rock_01.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/snow.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/snow.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/three.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/three.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/three.module.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/lib/three.module.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,6 +46,7 @@
   <component name="ProjectId" id="1SKaY9yfhpn105wl13Ain7VItI1" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -43,6 +65,16 @@
       </list>
     </option>
   </component>
+  <component name="RunManager">
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Snow-Storm/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.index.html" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -53,7 +85,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1571314785596</updated>
-      <workItem from="1571314787877" duration="1411000" />
+      <workItem from="1571314787877" duration="8908000" />
     </task>
     <servers />
   </component>
