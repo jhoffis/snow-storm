@@ -98,7 +98,7 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
         width,
         heightmapImage,
         numberOfSubdivisions: 128,
-        heihgt: 40
+        heigt: 40
     });
 
     // const terrainMaterial = new MeshPhongMaterial({
