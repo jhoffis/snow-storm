@@ -10,14 +10,20 @@ import {
     DirectionalLight,
     AmbientLight,
     MeshPhongMaterial,
-    Vector3
+    Vector3,
+    MeshBasicMaterial,
+    AxesHelper,
+   BackSide
 } from './lib/three.module.js';
+
+import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r108/build/three.module.js';
 
 import Utilities from './lib/Utilities.js';
 import MouseLookController from './controls/MouseLookController.js';
 
 import TextureSplattingMaterial from './materials/TextureSplattingMaterial.js';
 import TerrainBufferGeometry from './terrain/TerrainBufferGeometry.js';
+//import {CubeGeometry, DoubleSide} from "./lib/three.module";
 
 const scene = new Scene();
 
@@ -133,7 +139,62 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
 
     scene.add(terrain);
 
+//MIDLERTIDIG SKYBOX --FUNKER, men kan gjøres bedre
+    /*
+    const loader = new CubeTextureLoader();
+    const texturesky = loader.load([
+        'res/textures/iceflats_ft.png',
+        'res/textures/iceflats_bk.png',
+        'res/textures/iceflats_up.png',
+        'res/textures/iceflats_dn.png',
+        'res/textures/iceflats_rt.png',
+        'res/textures/iceflats_lf.png'
+    ]);
+    scene.background = texturesky;
+
+     */
+
+//FORSØK PÅ SKYBOX - Må jobbes litt mer med. Også endre bildene til noe mer passende
+    //https://stackoverflow.com/questions/31391021/positioning-objects-at-the-same-elevation
+    let materialArray = [];
+    let texture_ft = new TextureLoader().load( 'res/textures/iceflats_ft.png');
+    let texture_bk = new TextureLoader().load( 'res/textures/iceflats_bk.png');
+    let texture_up = new TextureLoader().load( 'res/textures/iceflats_up.png');
+    let texture_dn = new TextureLoader().load( 'res/textures/iceflats_dn.png');
+    let texture_rt = new TextureLoader().load( 'res/textures/iceflats_rt.png');
+    let texture_lf = new TextureLoader().load( 'res/textures/iceflats_lf.png');
+
+    materialArray.push(new MeshBasicMaterial( { map: texture_ft }));
+    materialArray.push(new MeshBasicMaterial( { map: texture_bk }));
+    materialArray.push(new MeshBasicMaterial( { map: texture_up }));
+    materialArray.push(new MeshBasicMaterial( { map: texture_dn }));
+    materialArray.push(new MeshBasicMaterial( { map: texture_rt }));
+    materialArray.push(new MeshBasicMaterial( { map: texture_lf }));
+
+    for (let i = 0; i < 6; i++)
+        materialArray[i].side = BackSide;
+
+    let skyboxGeo = new THREE.BoxGeometry( 1000, 1000, 1000);
+    //For å justere posisjonen til skyboxen (ser ikke helt bra ut per nå)
+    //skyboxGeo.translate( 0, 1000/2, 0 );
+
+    let skybox = new THREE.Mesh( skyboxGeo, materialArray );
+    //Justere posisjonen
+    skybox.position.set(0, 0, 0);
+    scene.add( skybox );
+
+
+
+
+
+    //AxesHelper ikke i bruk per nå
+    var axesHelper = new AxesHelper( 5 );
+    scene.add( axesHelper );
 });
+
+
+
+
 
 /**
  * Set up camera controller:
