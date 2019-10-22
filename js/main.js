@@ -24,6 +24,7 @@ import MouseLookController from './controls/MouseLookController.js';
 import TextureSplattingMaterial from './materials/TextureSplattingMaterial.js';
 import TerrainBufferGeometry from './terrain/TerrainBufferGeometry.js';
 //import {CubeGeometry, DoubleSide} from "./lib/three.module";
+import Snow from './terrain/snow.js';
 
 const scene = new Scene();
 
@@ -86,7 +87,7 @@ scene.add(cube);
 camera.position.z = 10.2;
 camera.position.y = 25.2;
 let terrainGeometry;
-
+const terrainWidth = 100;
 /**
  * Add terrain:
  *
@@ -98,10 +99,9 @@ let terrainGeometry;
  */
 Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
 
-    const width = 100;
 
     terrainGeometry = new TerrainBufferGeometry({
-        width,
+        width: terrainWidth,
         heightmapImage,
         numberOfSubdivisions: 128,
         height: 40
@@ -115,12 +115,12 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
     const grassTexture = new TextureLoader().load('res/textures/grass_01.jpg');
     grassTexture.wrapS = RepeatWrapping;
     grassTexture.wrapT = RepeatWrapping;
-    grassTexture.repeat.set(1000 / width, 1000 / width);
+    grassTexture.repeat.set(1000 / terrainWidth, 1000 / terrainWidth);
 
     const snowyRockTexture = new TextureLoader().load('res/textures/snowy_rock_01.png');
     snowyRockTexture.wrapS = RepeatWrapping;
     snowyRockTexture.wrapT = RepeatWrapping;
-    snowyRockTexture.repeat.set(1500 / width, 1500 / width);
+    snowyRockTexture.repeat.set(1500 / terrainWidth, 1500 / terrainWidth);
 
 
     const splatMap = new TextureLoader().load('res/images/splatmap_01.png');
@@ -193,7 +193,7 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
 });
 
 
-
+let snow = new Snow(terrainWidth, scene);
 
 
 /**

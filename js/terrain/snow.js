@@ -1,8 +1,8 @@
 "use strict";
 
-import {Geometry, Points, PointsMaterial, Vector3} from "../lib/three.module";
+import {Geometry, Points, PointsMaterial, Vector3} from "../lib/three.module.js";
 
-class Snow {
+export default class Snow {
     constructor(terrainWidth, scene) {
         // create the particle variables
         let particleCount = 1800,
