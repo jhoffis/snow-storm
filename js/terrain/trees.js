@@ -8,8 +8,7 @@ export default class Trees {
         //creating tree variable, with 100 trees
         let treeCount = 100,
             treeGeometry = new BoxGeometry(1, 3, 1),
-            treeMaterial = new MeshBasicMaterial({color: 0xff0000});
-
+            treeMaterial = new MeshBasicMaterial({color: 0xff0000})
         //creating each individual tree
         for (let i = 0; i < treeCount; i++) {
             let pX = Math.random() * terrainWidth - terrainWidth/2,
