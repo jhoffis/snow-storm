@@ -25,7 +25,7 @@ import TextureSplattingMaterial from './materials/TextureSplattingMaterial.js';
 import TerrainBufferGeometry from './terrain/TerrainBufferGeometry.js';
 //import {CubeGeometry, DoubleSide} from "./lib/three.module";
 import Snow from './terrain/snow.js';
-
+import ExternalObject from './terrain/ExternalObject.js';
 const scene = new Scene();
 
 const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -355,5 +355,8 @@ function loop(now) {
     requestAnimationFrame(loop);
 
 };
+
+new ExternalObject(scene, "res/models/gun.glb");
+
 
 loop(performance.now());
