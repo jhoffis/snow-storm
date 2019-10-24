@@ -51,12 +51,14 @@ window.addEventListener('resize', () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
 }, false);
 
+
+
 /**
  * Add canvas element to DOM.
  */
 document.body.appendChild(renderer.domElement);
 
-const ambientLight = new AmbientLight(0xffffff, 0.15);
+const ambientLight = new AmbientLight(0xffffff, 0.55);
 scene.add(ambientLight);
 
 const directionalLight = new DirectionalLight(0xffffff, 2);
@@ -345,6 +347,8 @@ function loop(now) {
         if (heightCam < 200)
             camera.position.y = heightCam + 2;
     }
+
+    snow.fall(1, camera);
     // render scene:
     renderer.render(scene, camera);
 
