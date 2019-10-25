@@ -25,7 +25,7 @@ import TextureSplattingMaterial from './materials/TextureSplattingMaterial.js';
 import TerrainBufferGeometry from './terrain/TerrainBufferGeometry.js';
 //import {CubeGeometry, DoubleSide} from "./lib/three.module";
 import Snow from './terrain/snow.js';
-import Ice from './terrain/Ice.js';
+//import Ice from './terrain/Ice.js';
 //gjenstående ting fra Sondre sine gamle trær om nødvendig
 //import Tree from './terrain/trees.js';
 
@@ -202,7 +202,7 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
 
 
 let snow = new Snow(terrainWidth, scene);
-let ice = new Ice(terrainWidth, scene);
+//let ice = new Ice(terrainWidth, scene);
 
 
 
@@ -364,7 +364,7 @@ function loop(now) {
 
 };
 
-new ExternalObject(scene, "res/models/gun.glb");
+new ExternalObject(scene, 'res/models/gun.gltf');
 
 
 loop(performance.now());

@@ -9,9 +9,9 @@ export default class ExternalObject {
         loader.load(url, function (gltf) {
 
             const root = gltf.scene;
-            root.scale.x = 0.5
-            root.scale.y = 0.5
-            root.scale.z = 0.5
+            root.scale.x = 10;
+            root.scale.y = 10;
+            root.scale.z = 10;
             scene.add(root);
             console.log(root)
 

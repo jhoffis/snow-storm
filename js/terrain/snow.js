@@ -15,7 +15,7 @@ export default class Snow {
                 map: texture, color: 0xffffff,
                 transparent: true
             });
-            for (let p = 0; p < 20000; p++) {
+            for (let p = 0; p < 20; p++) {
                 let snow = new Sprite(snowMaterial);
                 snow.position.set(
                     Math.random() * terrainWidth - terrainWidth / 2,
@@ -75,8 +75,8 @@ export default class Snow {
             let pCheck = p.position.clone();
             let angle = Math.tan(180 / Math.PI * camera.rotation.y) * 2;
             pCheck.y = camera.position.y + angle;
-            console.log(angle)
-            console.log(pCheck.y)
+            //console.log(angle)
+            //console.log(pCheck.y)
             if (frustum.containsPoint(pCheck)) {
                 // Do something with the position...
                 p.lookAt(camera.position);
