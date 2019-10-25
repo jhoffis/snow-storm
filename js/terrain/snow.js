@@ -1,20 +1,22 @@
 "use strict";
 
 // import {Geometry, Vector3, Points, PointsMaterial} from "../lib/three.module.js";
-import  {TextureLoader, PlaneBufferGeometry, MeshLambertMaterial, Mesh} from "../lib/three.module.js";
+import {TextureLoader, Sprite, SpriteMaterial, NearestFilter, Frustum, Matrix4} from "../lib/three.module.js";
 
 export default class Snow {
     constructor(terrainWidth, scene) {
         let loader = new TextureLoader();
         let snowTemp = [];
-        loader.load("res/textures/snow.png",function(texture) {
-            let snowGeo = new PlaneBufferGeometry(1, 1);
-            let snowMaterial = new MeshLambertMaterial({
-                map: texture,
+        loader.load("res/textures/snow.png", function (texture) {
+
+            texture.magFilter = NearestFilter;
+
+            let snowMaterial = new SpriteMaterial({
+                map: texture, color: 0xffffff,
                 transparent: true
             });
-            for (let p = 0; p < 2000; p++) {
-                let snow = new Mesh(snowGeo, snowMaterial);
+            for (let p = 0; p < 20000; p++) {
+                let snow = new Sprite(snowMaterial);
                 snow.position.set(
                     Math.random() * terrainWidth - terrainWidth / 2,
                     Math.random() * 40 + 40,
@@ -58,22 +60,40 @@ export default class Snow {
 
     }
 
-    fall(speed, pointTowards) {
+    fall(speed, camera) {
 
         this.snows.forEach(p => {
+
+
+            camera.updateMatrix();
+            camera.updateMatrixWorld();
+            let frustum = new Frustum();
+            frustum.setFromMatrix(new Matrix4().multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse));
+
+// Your 3d point to check
+
+            let pCheck = p.position.clone();
+            let angle = Math.tan(180 / Math.PI * camera.rotation.y) * 2;
+            pCheck.y = camera.position.y + angle;
+            console.log(angle)
+            console.log(pCheck.y)
+            if (frustum.containsPoint(pCheck)) {
+                // Do something with the position...
+                p.lookAt(camera.position);
+                // p.rotation.set(pointTowards.rotation., 1, pointTowards.rotation.x);
+
+                p.velocity = -0.1 + Math.random() * 0.1;
+                p.position.y += p.velocity;
+                if (p.position.y < 0 && Math.random() > 0.97) {
+                    p.position.y = 40;
+                    p.velocity = 0;
+                }
+            }
 
             // p.rotation.x = ( p.rotation.y * pointTowards.position.z - p.rotation.z * pointTowards.position.y);
             // p.rotation.y = ( p.rotation.z * pointTowards.position.x - p.rotation.x * pointTowards.position.z);
             // p.rotation.z = ( p.rotation.x * pointTowards.position.y - p.rotation.y * pointTowards.position.x);
 
-            // p.rotateTowards()
-
-            p.velocity = - 0.5 + Math.random() * 0.1;
-            p.position.y += p.velocity;
-            if (p.position.y < 0 && Math.random() > 0.97) {
-                p.position.y = 40;
-                p.velocity = 0;
-            }
         });
         // this.rainGeo.verticesNeedUpdate = true;
         // this.rain.rotation.y += 0.00002;
