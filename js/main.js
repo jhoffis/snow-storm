@@ -15,6 +15,7 @@ import {
     AxesHelper,
    BackSide
 } from './lib/three.module.js';
+
 import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r108/build/three.module.js';
 
 import Utilities from './lib/Utilities.js';
@@ -28,6 +29,7 @@ import Ice from './terrain/Ice.js';
 //gjenstående ting fra Sondre sine gamle trær om nødvendig
 //import Tree from './terrain/trees.js';
 
+import ExternalObject from './terrain/ExternalObject.js';
 const scene = new Scene();
 
 const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -361,5 +363,8 @@ function loop(now) {
     requestAnimationFrame(loop);
 
 };
+
+new ExternalObject(scene, "res/models/gun.glb");
+
 
 loop(performance.now());
