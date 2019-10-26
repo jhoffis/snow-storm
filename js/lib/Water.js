@@ -7,21 +7,6 @@
  *
  */
 
-import {
-    Clock,
-    Color,
-    Matrix4,
-    Mesh,
-    RepeatWrapping,
-    ShaderMaterial,
-    TextureLoader,
-    UniformsLib,
-    UniformsUtils,
-    Vector2,
-    Vector4
-} from './three.module.js';
-import { Reflector } from "./Reflector.js";
-import { Refractor } from "./Refractor.js";
 
 var Water = function ( geometry, options ) {
 
@@ -33,17 +18,17 @@ var Water = function ( geometry, options ) {
 
     options = options || {};
 
-    var color = ( options.color !== undefined ) ? new Color( options.color ) : new Color( 0xFFFFFF );
+    var color = ( options.color !== undefined ) ? new THREE.Color( options.color ) : new THREE.Color( 0xFFFFFF );
     var textureWidth = options.textureWidth || 512;
     var textureHeight = options.textureHeight || 512;
     var clipBias = options.clipBias || 0;
-    var flowDirection = options.flowDirection || new Vector2( 1, 0 );
+    var flowDirection = options.flowDirection || new THREE.Vector2( 1, 0 );
     var flowSpeed = options.flowSpeed || 0.03;
     var reflectivity = options.reflectivity || 0.02;
     var scale = options.scale || 1;
     var shader = options.shader || Water.WaterShader;
 
-    var textureLoader = new TextureLoader();
+    var textureLoader = new THREE.TextureLoader();
 
     var flowMap = options.flowMap || undefined;
     var normalMap0 = options.normalMap0 || textureLoader.load( 'textures/water/Water_1_M_Normal.jpg' );
@@ -51,32 +36,32 @@ var Water = function ( geometry, options ) {
 
     var cycle = 0.15; // a cycle of a flow map phase
     var halfCycle = cycle * 0.5;
-    var textureMatrix = new Matrix4();
-    var clock = new Clock();
+    var textureMatrix = new THREE.Matrix4();
+    var clock = new THREE.Clock();
 
     // internal components
 
-    if ( Reflector === undefined ) {
+    if ( THREE.Reflector === undefined ) {
 
         console.error( 'THREE.Water: Required component Reflector not found.' );
         return;
 
     }
 
-    if ( Refractor === undefined ) {
+    if ( THREE.Refractor === undefined ) {
 
         console.error( 'THREE.Water: Required component Refractor not found.' );
         return;
 
     }
 
-    var reflector = new Reflector( geometry, {
+    var reflector = new THREE.Reflector( geometry, {
         textureWidth: textureWidth,
         textureHeight: textureHeight,
         clipBias: clipBias
     } );
 
-    var refractor = new Refractor( geometry, {
+    var refractor = new THREE.Refractor( geometry, {
         textureWidth: textureWidth,
         textureHeight: textureHeight,
         clipBias: clipBias
@@ -87,9 +72,9 @@ var Water = function ( geometry, options ) {
 
     // material
 
-    this.material = new ShaderMaterial( {
-        uniforms: UniformsUtils.merge( [
-            UniformsLib[ 'fog' ],
+    this.material = new THREE.ShaderMaterial( {
+        uniforms: THREE.UniformsUtils.merge( [
+            THREE.UniformsLib[ 'fog' ],
             shader.uniforms
         ] ),
         vertexShader: shader.vertexShader,
@@ -117,8 +102,8 @@ var Water = function ( geometry, options ) {
 
     // maps
 
-    normalMap0.wrapS = normalMap0.wrapT = RepeatWrapping;
-    normalMap1.wrapS = normalMap1.wrapT = RepeatWrapping;
+    normalMap0.wrapS = normalMap0.wrapT = THREE.RepeatWrapping;
+    normalMap1.wrapS = normalMap1.wrapT = THREE.RepeatWrapping;
 
     this.material.uniforms[ "tReflectionMap" ].value = reflector.getRenderTarget().texture;
     this.material.uniforms[ "tRefractionMap" ].value = refractor.getRenderTarget().texture;
@@ -201,7 +186,7 @@ var Water = function ( geometry, options ) {
 
 };
 
-Water.prototype = Object.create( Mesh.prototype );
+Water.prototype = Object.create( THREE.Mesh.prototype );
 Water.prototype.constructor = Water;
 
 Water.WaterShader = {
@@ -245,7 +230,7 @@ Water.WaterShader = {
 
         'config': {
             type: 'v4',
-            value: new Vector4()
+            value: new THREE.Vector4()
         }
 
     },

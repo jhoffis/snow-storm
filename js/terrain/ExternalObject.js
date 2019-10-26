@@ -1,10 +1,9 @@
 "use strict";
-import {GLTFLoader} from 'https://threejsfundamentals.org/threejs/resources/threejs/r108/examples/jsm/loaders/GLTFLoader.js';
 
-export default class ExternalObject {
+class ExternalObject {
     constructor(scene, url) {
 
-        let loader = new GLTFLoader();
+        let loader = new THREE.GLTFLoader();
 
         loader.load(url, function (gltf) {
 

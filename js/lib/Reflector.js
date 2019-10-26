@@ -2,22 +2,6 @@
  * @author Slayvin / http://slayvin.net
  */
 
-import {
-    Color,
-    LinearFilter,
-    Math as _Math,
-    Matrix4,
-    Mesh,
-    PerspectiveCamera,
-    Plane,
-    RGBFormat,
-    ShaderMaterial,
-    UniformsUtils,
-    Vector3,
-    Vector4,
-    WebGLRenderTarget
-} from "../../../build/three.module.js";
-
 var Reflector = function ( geometry, options ) {
 
     Mesh.call( this, geometry );

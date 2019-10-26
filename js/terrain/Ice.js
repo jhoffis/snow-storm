@@ -1,11 +1,9 @@
 "use strict";
 
-import {PlaneBufferGeometry} from "../lib/three.module.js";
-import { Water } from '../lib/Water.js';
-export default class Ice {
+class Ice {
 
     constructor(terrainWidth, scene){
-        var waterGeometry = new PlaneBufferGeometry(terrainWidth, terrainWidth);
+        let waterGeometry = new THREE.PlaneBufferGeometry(terrainWidth, terrainWidth);
         let water = new Water(waterGeometry, {
             color: 0xFF0000,
             scale: 4,

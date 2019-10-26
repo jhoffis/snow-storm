@@ -1,7 +1,6 @@
 
-import { ShaderChunk } from '../lib/three.module.js';
 
-export default class ShaderCustomiser {
+class ShaderCustomiser {
 
     static customise(code, chunks = {}) {
 
@@ -25,7 +24,7 @@ export default class ShaderCustomiser {
 
     static prepend(code, name, text) {
 
-        const chunk = ShaderChunk[name];
+        const chunk = THREE.ShaderChunk[name];
 
         if (typeof chunk !== 'undefined') {
             
@@ -47,7 +46,7 @@ export default class ShaderCustomiser {
 
     static replace(code, name, text) {
 
-        const chunk = ShaderChunk[name];
+        const chunk = THREE.ShaderChunk[name];
 
         if (typeof chunk !== 'undefined') {
             
@@ -64,7 +63,7 @@ export default class ShaderCustomiser {
 
     static append(code, name, text) {
 
-        const chunk = ShaderChunk[name];
+        const chunk = THREE.ShaderChunk[name];
 
         if (typeof chunk !== 'undefined') {
             

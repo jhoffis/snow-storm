@@ -1,44 +1,39 @@
-
-import { ShaderMaterial, Color, ShaderLib, UniformsLib, UniformsUtils } from '../lib/three.module.js';
-
-import ShaderCustomiser from './ShaderCustomiser.js';
-
-export default class TextureSplattingMaterial extends ShaderMaterial {
+class TextureSplattingMaterial extends THREE.ShaderMaterial {
     /**
      * Contructor for TextureSplattingMaterial.
-     * 
+     *
      * @param {Array<Texture>} textures
      * @param {Array<Texture>} splatMaps For blending between the textures. One less than textures.
      */
     constructor({
-        color = 0xffffff,
-        emissive = 0x000000,
-        specular = 0x111111,
-        shininess = 30,
-        textures = null,
-        splatMaps = null,
-        map = null
-    }) {
+                    color = 0xffffff,
+                    emissive = 0x000000,
+                    specular = 0x111111,
+                    shininess = 30,
+                    textures = null,
+                    splatMaps = null,
+                    map = null
+                }) {
 
-        const uniforms = UniformsUtils.merge([
+        const uniforms = THREE.UniformsUtils.merge([
             // pass in the defaults from uniforms lib.
-            UniformsLib.common,
-            UniformsLib.specularmap,
-            UniformsLib.envmap,
-            UniformsLib.aomap,
-            UniformsLib.lightmap,
-            UniformsLib.emissivemap,
-            UniformsLib.bumpmap,
-            UniformsLib.normalmap,
-            UniformsLib.displacementmap,
-            UniformsLib.gradientmap,
-            UniformsLib.fog,
-            UniformsLib.lights,
+            THREE.UniformsLib.common,
+            THREE.UniformsLib.specularmap,
+            THREE.UniformsLib.envmap,
+            THREE.UniformsLib.aomap,
+            THREE.UniformsLib.lightmap,
+            THREE.UniformsLib.emissivemap,
+            THREE.UniformsLib.bumpmap,
+            THREE.UniformsLib.normalmap,
+            THREE.UniformsLib.displacementmap,
+            THREE.UniformsLib.gradientmap,
+            THREE.UniformsLib.fog,
+            THREE.UniformsLib.lights,
             {
-                diffuse: { value: new Color(color) },
-                emissive: { value: new Color(emissive) },
-                specular: { value: new Color(specular) },
-                shininess: { value: shininess }
+                diffuse: {value: new THREE.Color(color)},
+                emissive: {value: new THREE.Color(emissive)},
+                specular: {value: new THREE.Color(specular)},
+                shininess: {value: shininess}
             }
         ]);
 
@@ -128,7 +123,7 @@ export default class TextureSplattingMaterial extends ShaderMaterial {
             varying vec2 textureUVs[${length}]; // computed in vertexshader
         #endif
                 `;
-        
+
         const splatmap_code = `
 #ifdef USE_SPLATMAP
     float splatSum = 0.0;
@@ -153,14 +148,14 @@ export default class TextureSplattingMaterial extends ShaderMaterial {
 
         /** END*/
 
-        // generate customised shaders. i. e. replace or append code to an existing shader program.
+            // generate customised shaders. i. e. replace or append code to an existing shader program.
 
-        const vertexShader = ShaderCustomiser.customise(ShaderLib.phong.vertexShader, {
-            uv_pars_vertex: uv_pars_vertex_custom,
-            uv_vertex: uv_vertex_custom
-        });
+        const vertexShader = ShaderCustomiser.customise(THREE.ShaderLib.phong.vertexShader, {
+                uv_pars_vertex: uv_pars_vertex_custom,
+                uv_vertex: uv_vertex_custom
+            });
 
-        const fragmentShader = ShaderCustomiser.customise(ShaderLib.phong.fragmentShader, {
+        const fragmentShader = ShaderCustomiser.customise(THREE.ShaderLib.phong.fragmentShader, {
             uv_pars_fragment: uv_pars_fragment_custom,
             logdepthbuf_fragment: {
                 text: splatmap_code,
@@ -178,3 +173,4 @@ export default class TextureSplattingMaterial extends ShaderMaterial {
         });
     }
 }
+

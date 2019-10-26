@@ -1,22 +1,19 @@
 "use strict";
 
-// import {Geometry, Vector3, Points, PointsMaterial} from "../lib/three.module.js";
-import {TextureLoader, Sprite, SpriteMaterial, NearestFilter, Frustum, Matrix4} from "../lib/three.module.js";
-
-export default class Snow {
+class Snow {
     constructor(terrainWidth, scene) {
-        let loader = new TextureLoader();
+        let loader = new THREE.TextureLoader();
         let snowTemp = [];
         loader.load("res/textures/snow.png", function (texture) {
 
-            texture.magFilter = NearestFilter;
+            texture.magFilter = THREE.NearestFilter;
 
-            let snowMaterial = new SpriteMaterial({
+            let snowMaterial = new THREE.SpriteMaterial({
                 map: texture, color: 0xffffff,
                 transparent: true
             });
-            for (let p = 0; p < 20; p++) {
-                let snow = new Sprite(snowMaterial);
+            for (let p = 0; p < 2000; p++) {
+                let snow = new THREE.Sprite(snowMaterial);
                 snow.position.set(
                     Math.random() * terrainWidth - terrainWidth / 2,
                     Math.random() * 40 + 40,
@@ -67,16 +64,14 @@ export default class Snow {
 
             camera.updateMatrix();
             camera.updateMatrixWorld();
-            let frustum = new Frustum();
-            frustum.setFromMatrix(new Matrix4().multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse));
+            let frustum = new THREE.Frustum();
+            frustum.setFromMatrix(new THREE.Matrix4().multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse));
 
 // Your 3d point to check
 
             let pCheck = p.position.clone();
             let angle = Math.tan(180 / Math.PI * camera.rotation.y) * 2;
             pCheck.y = camera.position.y + angle;
-            //console.log(angle)
-            //console.log(pCheck.y)
             if (frustum.containsPoint(pCheck)) {
                 // Do something with the position...
                 p.lookAt(camera.position);

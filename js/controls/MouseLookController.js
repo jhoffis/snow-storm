@@ -1,20 +1,15 @@
-import {
-    Quaternion,
-    Vector3
-} from '../lib/three.module.js';
-
-export default class MouseLookController {
+class MouseLookController {
 
     constructor(camera) {
         
         this.camera = camera;
 
-        this.FD = new Vector3(0, 0, 1);
-        this.UD = new Vector3(0, 1, 0);
-        this.LD = new Vector3(1, 0, 0);
+        this.FD = new THREE.Vector3(0, 0, 1);
+        this.UD = new THREE.Vector3(0, 1, 0);
+        this.LD = new THREE.Vector3(1, 0, 0);
 
-        this.pitchQuaternion = new Quaternion();
-        this.yawQuaternion = new Quaternion();
+        this.pitchQuaternion = new THREE.Quaternion();
+        this.yawQuaternion = new THREE.Quaternion();
 
     }
 

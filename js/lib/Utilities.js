@@ -4,7 +4,7 @@
  * Collection of general purpose utilities.
  * oskarbraten
  */
-export default class Utilities {
+class Utilities {
 	/**
 	 * Loads image from url.
 	 * @param  {String} url Location of image to load.

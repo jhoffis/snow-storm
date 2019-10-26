@@ -3,10 +3,8 @@
  * oskarbraten
  */
 
-import Utilities from '../lib/Utilities.js';
-import {PlaneBufferGeometry, Vector3} from '../lib/three.module.js';
 
-export default class TerrainBufferGeometry extends PlaneBufferGeometry {
+class TerrainBufferGeometry extends THREE.PlaneBufferGeometry {
 
     constructor({heightmapImage, width = 100, numberOfSubdivisions = 128, height = 20}) {
 
@@ -70,7 +68,7 @@ export default class TerrainBufferGeometry extends PlaneBufferGeometry {
 
     getHeightAtPrecise(position) {
 
-        let p = new Vector3(position.x, 0, position.z);
+        let p = new THREE.Vector3(position.x, 0, position.z);
         //Grunnen til at vi plusser på halvparten er fordi meshen blir plassert i verden sentrert,
         // men mappen går fra 0 og oppover.
         p.x += (this.width / 2);
@@ -104,16 +102,16 @@ export default class TerrainBufferGeometry extends PlaneBufferGeometry {
         // Bestem hvilken trekant p.x og p.z står i.
         if (x_precise >= x_max - 0.5 && z_precise >= z_max - 0.5) {
             // (h0, h1, h2)
-            let p1 = new Vector3(x_max, h0, z_max);
-            let p2 = new Vector3(x_min, h1, z_max);
-            let p3 = new Vector3(x_max, h2, z_min);
+            let p1 = new THREE.Vector3(x_max, h0, z_max);
+            let p2 = new THREE.Vector3(x_min, h1, z_max);
+            let p3 = new THREE.Vector3(x_max, h2, z_min);
 
             height = this.calcY(p1, p2, p3, x_precise, z_precise);
         } else {
             // (h1, h2, h3)
-            let p1 = new Vector3(x_min, h1, z_max);
-            let p2 = new Vector3(x_max, h2, z_min);
-            let p3 = new Vector3(x_min, h3, z_min);
+            let p1 = new THREE.Vector3(x_min, h1, z_max);
+            let p2 = new THREE.Vector3(x_max, h2, z_min);
+            let p3 = new THREE.Vector3(x_min, h3, z_min);
 
             height = this.calcY(p1, p2, p3, x_precise, z_precise);
         }
