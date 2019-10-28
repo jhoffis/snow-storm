@@ -306,8 +306,12 @@ function loop(now) {
     requestAnimationFrame(loop);
 
 };
+//Gun
+ new ExternalObject(scene, 'res/models/gun.gltf' );
 
-new ExternalObject(scene, 'res/models/gun.gltf');
+
+//Trestubbe
+new ExternalObject(scene, 'res/models/tre1/scene.gltf',0.1 );
 
 
 loop(performance.now());
