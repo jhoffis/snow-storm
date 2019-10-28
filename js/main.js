@@ -90,7 +90,7 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
     // });
 
 
-    const grassTexture = new THREE.TextureLoader().load('res/textures/grass_01.jpg');
+    const grassTexture = new THREE.TextureLoader().load('res/textures/snow_01.jpg');
     grassTexture.wrapS = THREE.RepeatWrapping;
     grassTexture.wrapT = THREE.RepeatWrapping;
     grassTexture.repeat.set(1000 / terrainWidth, 1000 / terrainWidth);
