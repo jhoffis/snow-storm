@@ -311,7 +311,7 @@ function loop(now) {
 
 
 //Trestubbe
-new ExternalObject(scene, 'res/models/tre1/scene.gltf',0.1 );
+new ExternalObject(scene, 'res/models/tre1/scene.gltf',0.5, -9, 20, 0 );
 
 
 loop(performance.now());

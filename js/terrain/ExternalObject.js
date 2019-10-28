@@ -2,7 +2,7 @@
 
 class ExternalObject {
 
-    constructor(scene, url, size) {
+    constructor(scene, url, size, posX, posY, posZ) {
 
         let loader = new THREE.GLTFLoader();
         let newObj;
@@ -16,6 +16,13 @@ class ExternalObject {
                 newObj.scale.x = size;
                 newObj.scale.y = size;
                 newObj.scale.z = size;
+                console.log(posX, posY, posZ)
+            if (posX !== undefined && posY !== undefined && posZ !== undefined) {
+                newObj.position.set(posX, posY, posZ);
+            }
+            else{
+                newObj.position.set(0, 0, 0);
+            }
 
             scene.add(newObj);
             console.log(newObj)
