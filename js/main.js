@@ -4,6 +4,8 @@ const scene = new THREE.Scene();
 const cameraFOV = 75;
 const camera = new THREE.PerspectiveCamera(cameraFOV, window.innerWidth / window.innerHeight, 0.1, 1000);
 let freeCam = false;
+//Bullets
+let bullets = []
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setClearColor(0xffffff);
@@ -220,6 +222,18 @@ window.addEventListener('keyup', (e) => {
     } else if (e.code === 'KeyF') {
         freeCam = !freeCam;
         e.preventDefault();
+    } else if (e.code === 'KeyE'){
+        let bullet = new THREE.Mesh( new THREE.SphereGeometry(0.05, 8, 8),
+            new THREE.MeshBasicMaterial({color:0xffffff})
+        );
+        bullet.position.set(1,20,1)
+
+        bullet.alive = true;
+        setTimeout(function(){
+            bullet.alive = false;
+            scene.remove(bullet)
+        }, 1000);
+        scene.add(bullet)
     }
 });
 
@@ -278,6 +292,8 @@ function loop(now) {
         velocity.z += moveSpeed;
     }
 
+
+
     // update controller rotation.
     mouseLookController.update(pitch, yaw);
     yaw = 0;
@@ -287,6 +303,21 @@ function loop(now) {
 
     velocity.applyQuaternion(camera.quaternion);
     camera.position.add(velocity);
+
+    //Gun
+
+   // myGun.position.set(0,20,0
+        //camera.position.x =  velocity.x,
+        //camera.position.y = move.speed,
+        //camera.position.z = move.speed
+    //)
+    //console.log(move.speed)
+    //console.log(velocity.x)
+    //console.log(velocity.y)
+    //console.log(velocity.z)
+
+
+
 
 
     // animate cube rotation:
@@ -305,13 +336,13 @@ function loop(now) {
 
     requestAnimationFrame(loop);
 
+
 };
-//Gun
- new ExternalObject(scene, 'res/models/gun.gltf' );
 
 
 //Trestubbe
 new ExternalObject(scene, 'res/models/tre1/scene.gltf',0.5, -9, 20, 0 );
 
-
+let kvitrartgever = new ExternalObject(scene, 'res/models/gun.gltf', 10, velocity.x, velocity.y, velocity.z );
+kvitrartgever.position = new THREE.Vector3(100,0,0)
 loop(performance.now());
