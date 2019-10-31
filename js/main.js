@@ -1,11 +1,7 @@
 "use strict";
 
-
-
 const scene = new THREE.Scene();
-const cameraFOV = 75;
-const camera = new THREE.PerspectiveCamera(cameraFOV, window.innerWidth / window.innerHeight, 0.1, 1000);
-let freeCam = false;
+let character = new Character();
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setClearColor(0xffffff);
@@ -21,8 +17,8 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
  *  - update renderer size
  */
 window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
+    character.camera.aspect = window.innerWidth / window.innerHeight;
+    character.camera.updateProjectionMatrix();
 
     renderer.setSize(window.innerWidth, window.innerHeight);
 }, false);
@@ -62,10 +58,7 @@ directionalLight.target = cube;
 
 scene.add(cube);
 
-camera.position.z = 10.2;
-camera.position.y = 25.2;
-
-const terrainWidth = 250;
+const terrainWidth = 100;
 let terrainGeometry;
 
 /**
@@ -84,7 +77,7 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
         width: terrainWidth,
         heightmapImage,
         numberOfSubdivisions: 128,
-        height: 80
+        height: 40
     });
 
     // const terrainMaterial = new MeshPhongMaterial({
@@ -101,8 +94,6 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
     snowyRockTexture.wrapS = THREE.RepeatWrapping;
     snowyRockTexture.wrapT = THREE.RepeatWrapping;
     snowyRockTexture.repeat.set(1500 / terrainWidth, 1500 / terrainWidth);
-
-
 
 
     const splatMap = new THREE.TextureLoader().load('res/images/splatmap_01.png');
@@ -157,7 +148,6 @@ let snow = new Snow(terrainWidth, scene);
  * Set up camera controller:
  */
 
-const mouseLookController = new MouseLookController(camera);
 
 // We attach a click lister to the canvas-element so that we can request a pointer lock.
 // https://developer.mozilla.org/en-US/docs/Web/API/Pointer_Lock_API
@@ -184,57 +174,38 @@ document.addEventListener('pointerlockchange', () => {
     }
 });
 
-let move = {
-    forward: false,
-    backward: false,
-    left: false,
-    right: false,
-    speed: 0.01
-};
 
 window.addEventListener('keydown', (e) => {
     if (e.code === 'KeyW') {
-        move.forward = true;
+        character.move.forward = true;
         e.preventDefault();
     } else if (e.code === 'KeyS') {
-        move.backward = true;
+        character.move.backward = true;
         e.preventDefault();
     } else if (e.code === 'KeyA') {
-        move.left = true;
+        character.move.left = true;
         e.preventDefault();
     } else if (e.code === 'KeyD') {
-        move.right = true;
+        character.move.right = true;
         e.preventDefault();
-    } else if (e.code === 'KeyE'){
-        let bullet = new THREE.Mesh( new THREE.SphereGeometry(0.05, 8, 8),
-            new THREE.MeshBasicMaterial({color:0xffffff})
-        );
-        bullet.position.set(1,20,1)
-
-        bullet.alive = true;
-        setTimeout(function(){
-            bullet.alive = false;
-            scene.remove(bullet)
-        }, 1000);
-        scene.add(bullet)
     }
 });
 
 window.addEventListener('keyup', (e) => {
     if (e.code === 'KeyW') {
-        move.forward = false;
+        character.move.forward = false;
         e.preventDefault();
     } else if (e.code === 'KeyS') {
-        move.backward = false;
+        character. move.backward = false;
         e.preventDefault();
     } else if (e.code === 'KeyA') {
-        move.left = false;
+        character. move.left = false;
         e.preventDefault();
     } else if (e.code === 'KeyD') {
-        move.right = false;
+        character.move.right = false;
         e.preventDefault();
     } else if (e.code === 'KeyF') {
-        freeCam = !freeCam;
+        character.freeCam();
         e.preventDefault();
     }
 });
@@ -265,7 +236,7 @@ window.addEventListener('keyup', (e) => {
 //     }
 // );
 
-const velocity = new THREE.Vector3(0.0, 0.0, 0.0);
+
 
 let then = performance.now();
 
@@ -274,64 +245,34 @@ function loop(now) {
     const delta = now - then;
     then = now;
 
-    const moveSpeed = move.speed * delta;
-
-    velocity.set(0.0, 0.0, 0.0);
-
-    if (move.left) {
-        velocity.x -= moveSpeed;
-    }
-
-    if (move.right) {
-        velocity.x += moveSpeed;
-    }
-
-    if (move.forward) {
-        velocity.z -= moveSpeed;
-    }
-
-    if (move.backward) {
-        velocity.z += moveSpeed;
-    }
 
     // update controller rotation.
-    mouseLookController.update(pitch, yaw);
+    character.mouseLookController.update(pitch, yaw);
     yaw = 0;
     pitch = 0;
 
+    character.movement(delta);
     // apply rotation to velocity vector, and translate moveNode with it.
 
-    velocity.applyQuaternion(camera.quaternion);
-    camera.position.add(velocity);
 
 
     // animate cube rotation:
     cube.rotation.x += 0.01;
     cube.rotation.y += 0.01;
 
-    if (terrainGeometry != null && freeCam === false) {
-        let heightCam = terrainGeometry.getHeightAtPrecise(camera.position.clone());
-        if (heightCam < 200)
-            camera.position.y = heightCam + 2;
-    }
 
-    snow.fall(1, camera);
+    snow.fall(1,  character.camera);
     // render scene:
-    renderer.render(scene, camera);
+    renderer.render(scene,  character.camera);
 
     requestAnimationFrame(loop);
 
 };
 //Gun
- new ExternalObject(scene, 'res/models/gun.gltf' );
+
 
 
 //Trestubbe
-new ExternalObject(scene, 'res/models/tre1/scene.gltf',0.5, -9, 20, 0 );
-
-//PlainGeo
-new Water_S();
-
-
+let treeStub = new ExternalObject(scene, 'res/models/tre1/scene.gltf',0.5, -9, 20, 0 );
 
 loop(performance.now());

@@ -2,6 +2,8 @@
 
 class Snow {
     constructor(terrainWidth, scene) {
+
+
         let loader = new THREE.TextureLoader();
         let snowTemp = [];
         loader.load("res/textures/snow.png", function (texture) {
@@ -12,7 +14,7 @@ class Snow {
                 map: texture, color: 0xffffff,
                 transparent: true
             });
-            for (let p = 0; p < 2000; p++) {
+            for (let p = 0; p < 20000; p++) {
                 let snow = new THREE.Sprite(snowMaterial);
                 snow.position.set(
                     Math.random() * terrainWidth - terrainWidth / 2,
@@ -72,7 +74,6 @@ class Snow {
             let pCheck = p.position.clone();
             let angle = Math.tan(180 / Math.PI * camera.rotation.y) * 2;
             pCheck.y = camera.position.y + angle;
-            if (frustum.containsPoint(pCheck)) {
                 // Do something with the position...
                 p.lookAt(camera.position);
                 // p.rotation.set(pointTowards.rotation., 1, pointTowards.rotation.x);
@@ -83,7 +84,6 @@ class Snow {
                     p.position.y = 40;
                     p.velocity = 0;
                 }
-            }
 
             // p.rotation.x = ( p.rotation.y * pointTowards.position.z - p.rotation.z * pointTowards.position.y);
             // p.rotation.y = ( p.rotation.z * pointTowards.position.x - p.rotation.x * pointTowards.position.z);
