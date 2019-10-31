@@ -4,7 +4,7 @@ class Ice {
 
     constructor(terrainWidth, scene){
         let waterGeometry = new THREE.PlaneBufferGeometry(terrainWidth, terrainWidth);
-        let water = new Water(waterGeometry, {
+        let water = new Water_S(waterGeometry, {
             color: 0xFF0000,
             scale: 4,
             textureWidth: 1024,

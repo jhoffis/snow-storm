@@ -330,7 +330,7 @@ function loop(now) {
 new ExternalObject(scene, 'res/models/tre1/scene.gltf',0.5, -9, 20, 0 );
 
 //PlainGeo
-new Water();
+new Water_S();
 
 
 

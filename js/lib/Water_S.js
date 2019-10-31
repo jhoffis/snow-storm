@@ -6,14 +6,14 @@
  * 	http://graphicsrunner.blogspot.de/2010/08/water-using-flow-maps.html
  *
  */
-class Water extends THREE.Mesh{
+class Water_S extends THREE.Mesh{
     reflector = new Reflector();
     refractor = new Refractor();
     constructor (geometry, options) {
 
         super(geometry);
 
-        this.type = 'Water';
+        this.type = 'Water_S';
 
         var scope = this;
 
@@ -27,7 +27,7 @@ class Water extends THREE.Mesh{
         var flowSpeed = options.flowSpeed || 0.00;
         var reflectivity = options.reflectivity || 0.02;
         var scale = options.scale || 1;
-        var shader = options.shader || Water.WaterShader;
+        var shader = options.shader || Water_S.WaterShader;
 
         var textureLoader = new THREE.TextureLoader();
 
@@ -44,14 +44,14 @@ class Water extends THREE.Mesh{
 
         if (reflector === undefined) {
 
-            console.error('THREE.Water: Required component Reflector not found.');
+            console.error('THREE.Water_S: Required component Reflector not found.');
             return;
 
         }
 
         if (refractor === undefined) {
 
-            console.error('THREE.Water: Required component Refractor not found.');
+            console.error('THREE.Water_S: Required component Refractor not found.');
             return;
 
         }
