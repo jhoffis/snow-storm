@@ -1,5 +1,7 @@
 "use strict";
 
+
+
 const scene = new THREE.Scene();
 const cameraFOV = 75;
 const camera = new THREE.PerspectiveCamera(cameraFOV, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -63,7 +65,7 @@ scene.add(cube);
 camera.position.z = 10.2;
 camera.position.y = 25.2;
 
-const terrainWidth = 100;
+const terrainWidth = 250;
 let terrainGeometry;
 
 /**
@@ -82,7 +84,7 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
         width: terrainWidth,
         heightmapImage,
         numberOfSubdivisions: 128,
-        height: 40
+        height: 80
     });
 
     // const terrainMaterial = new MeshPhongMaterial({
@@ -99,6 +101,8 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
     snowyRockTexture.wrapS = THREE.RepeatWrapping;
     snowyRockTexture.wrapT = THREE.RepeatWrapping;
     snowyRockTexture.repeat.set(1500 / terrainWidth, 1500 / terrainWidth);
+
+
 
 
     const splatMap = new THREE.TextureLoader().load('res/images/splatmap_01.png');
@@ -201,6 +205,18 @@ window.addEventListener('keydown', (e) => {
     } else if (e.code === 'KeyD') {
         move.right = true;
         e.preventDefault();
+    } else if (e.code === 'KeyE'){
+        let bullet = new THREE.Mesh( new THREE.SphereGeometry(0.05, 8, 8),
+            new THREE.MeshBasicMaterial({color:0xffffff})
+        );
+        bullet.position.set(1,20,1)
+
+        bullet.alive = true;
+        setTimeout(function(){
+            bullet.alive = false;
+            scene.remove(bullet)
+        }, 1000);
+        scene.add(bullet)
     }
 });
 
@@ -312,6 +328,10 @@ function loop(now) {
 
 //Trestubbe
 new ExternalObject(scene, 'res/models/tre1/scene.gltf',0.5, -9, 20, 0 );
+
+//PlainGeo
+new Water();
+
 
 
 loop(performance.now());
