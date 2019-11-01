@@ -140,7 +140,7 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
 
 
 let snow = new Snow(terrainWidth, scene);
-//let ice = new Ice(terrainWidth, scene);
+let ice = new Ice(terrainWidth, scene);
 
 
 
@@ -188,7 +188,14 @@ window.addEventListener('keydown', (e) => {
     } else if (e.code === 'KeyD') {
         character.move.right = true;
         e.preventDefault();
+    }else if (e.keyCode === 32){
+        character.move.up = true;
+        e.preventDefault();
+    }else if (e.code === 'ctrlKey'){
+        character.move.down =true;
+        e.preventDefault();
     }
+
 });
 
 window.addEventListener('keyup', (e) => {

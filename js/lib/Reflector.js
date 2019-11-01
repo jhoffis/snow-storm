@@ -5,6 +5,7 @@
 function isPowerOfTwo(value) {return (value & (value - 1)) === 0 && value !== 0;}
 
 class Reflector extends THREE.Mesh {
+    ReflectorShader;
     constructor(options) {
 
         super(geometry);
@@ -19,7 +20,7 @@ class Reflector extends THREE.Mesh {
         var textureWidth = options.textureWidth || 512;
         var textureHeight = options.textureHeight || 512;
         var clipBias = options.clipBias || 0;
-        var shader = options.shader || Reflector.ReflectorShader;
+        var shader = options.shader || this.ReflectorShader;
         var recursion = options.recursion !== undefined ? options.recursion : 0;
 
         //
@@ -196,7 +197,6 @@ class Reflector extends THREE.Mesh {
     /*
         prototype = Object.create(super.prototype);
     */
-
     ReflectorShader = {
 
         uniforms: {

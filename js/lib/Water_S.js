@@ -19,7 +19,7 @@ class Water_S extends THREE.Mesh{
 
         options = options || {};
 
-        var color = (options.color !== undefined) ? new THREE.Color(options.color) : new THREE.Color(0xFFFFFF);
+        var color = (options.color !== undefined) ? new THREE.Color(options.color) : new THREE.Color(0x000000);
         var textureWidth = options.textureWidth || 512;
         var textureHeight = options.textureHeight || 512;
         var clipBias = options.clipBias || 0;
@@ -186,9 +186,9 @@ class Water_S extends THREE.Mesh{
         };
 
     };
-
+/*
     prototype = Object.create(super.prototype);
-
+*/
     WaterShader = {
 
         uniforms: {

@@ -5,6 +5,7 @@
 function isPowerOfTwo(value) {return (value & (value - 1)) === 0 && value !== 0;}
 
 class Refractor extends THREE.Mesh{
+    RefractorShader;
 
     constructor ( geometry, options ) {
 
@@ -20,7 +21,7 @@ class Refractor extends THREE.Mesh{
         var textureWidth = options.textureWidth || 512;
         var textureHeight = options.textureHeight || 512;
         var clipBias = options.clipBias || 0;
-        var shader = options.shader || Refractor.RefractorShader;
+        var shader = options.shader || this.RefractorShader;
 
     //
 
@@ -262,15 +263,15 @@ class Refractor extends THREE.Mesh{
         uniforms: {
 
             'color': {
-                value: null
+                value: 0xFFFFFFF
             },
 
             'tDiffuse': {
-                value: null
+                value: 0
             },
 
             'textureMatrix': {
-                value: null
+                value: 0
             }
 
         },

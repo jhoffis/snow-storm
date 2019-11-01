@@ -13,6 +13,8 @@ class Character {
             backward: false,
             left: false,
             right: false,
+            up: false,
+            down:false,
             speed: 0.01
         };
 
@@ -46,6 +48,13 @@ class Character {
         if (this.move.backward) {
             this.velocity.z += moveSpeed;
         }
+        if(this.move.up){
+            this.velocity.y += moveSpeed;
+        }
+        if(this.move.down){
+            this.velocity.y -= moveSpeed;
+        }
+
         this.velocity.applyQuaternion(this.camera.quaternion);
         this.camera.position.add(this.velocity);
 
