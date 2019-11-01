@@ -2,6 +2,8 @@
  * @author Mugen87 / https://github.com/Mugen87
  *
  */
+function isPowerOfTwo(value) {return (value & (value - 1)) === 0 && value !== 0;}
+
 class Refractor extends THREE.Mesh{
 
     constructor ( geometry, options ) {
@@ -42,7 +44,7 @@ class Refractor extends THREE.Mesh{
 
         var renderTarget = new THREE.WebGLRenderTarget( textureWidth, textureHeight, parameters );
 
-        if ( ! _Math.isPowerOfTwo( textureWidth ) || ! _Math.isPowerOfTwo( textureHeight ) ) {
+        if ( !isPowerOfTwo( textureWidth ) || !isPowerOfTwo( textureHeight ) ) {
 
             renderTarget.texture.generateMipmaps = false;
 
@@ -50,8 +52,8 @@ class Refractor extends THREE.Mesh{
 
         // material
 
-        this.material = new ShaderMaterial( {
-            uniforms: UniformsUtils.clone( shader.uniforms ),
+        this.material = new THREE.ShaderMaterial( {
+            uniforms: THREE.UniformsUtils.clone( shader.uniforms ),
             vertexShader: shader.vertexShader,
             fragmentShader: shader.fragmentShader,
             transparent: true // ensures, refractors are drawn from farthest to closest
@@ -65,12 +67,12 @@ class Refractor extends THREE.Mesh{
 
         var visible = ( function () {
 
-            var refractorWorldPosition = new Vector3();
-            var cameraWorldPosition = new Vector3();
-            var rotationMatrix = new Matrix4();
+            var refractorWorldPosition = new THREE.Vector3();
+            var cameraWorldPosition = new THREE.Vector3();
+            var rotationMatrix = new THREE.Matrix4();
 
-            var view = new Vector3();
-            var normal = new Vector3();
+            var view = new THREE.Vector3();
+            var normal = new THREE.Vector3();
 
             return function visible( camera ) {
 
@@ -92,10 +94,10 @@ class Refractor extends THREE.Mesh{
 
         var updateRefractorPlane = ( function () {
 
-            var normal = new Vector3();
-            var position = new Vector3();
-            var quaternion = new Quaternion();
-            var scale = new Vector3();
+            var normal = new THREE.Vector3();
+            var position = new THREE.Vector3();
+            var quaternion = new THREE.Quaternion();
+            var scale = new THREE.Vector3();
 
             return function updateRefractorPlane() {
 
@@ -114,9 +116,9 @@ class Refractor extends THREE.Mesh{
 
         var updateVirtualCamera = ( function () {
 
-            var clipPlane = new Plane();
-            var clipVector = new Vector4();
-            var q = new Vector4();
+            var clipPlane = new THREE.Plane();
+            var clipVector = new THREE.Vector4();
+            var q = new THREE.Vector4();
 
             return function updateVirtualCamera( camera ) {
 
@@ -249,11 +251,12 @@ class Refractor extends THREE.Mesh{
         };
 
     };
-
-    function
-    prototype = Object.create( this.prototype );
+/*
+    function makePrototype(){
+    var prototype = Object.create( this.prototype );
     prototype.constructor = Refractor;
-
+    }
+  */
     RefractorShader = {
 
         uniforms: {

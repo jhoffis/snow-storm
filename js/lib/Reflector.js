@@ -1,6 +1,9 @@
 /**
  * @author Slayvin / http://slayvin.net
  */
+//Helping function
+function isPowerOfTwo(value) {return (value & (value - 1)) === 0 && value !== 0;}
+
 class Reflector extends THREE.Mesh {
     constructor(options) {
 
@@ -12,7 +15,7 @@ class Reflector extends THREE.Mesh {
 
         options = options || {};
 
-        var color = (options.color !== undefined) ? new Color(options.color) : new Color(0x7F7F7F);
+        var color = (options.color !== undefined) ? new THREE.Color(options.color) : new THREE.Color(0x7F7F7F);
         var textureWidth = options.textureWidth || 512;
         var textureHeight = options.textureHeight || 512;
         var clipBias = options.clipBias || 0;
@@ -21,38 +24,38 @@ class Reflector extends THREE.Mesh {
 
         //
 
-        var reflectorPlane = new Plane();
-        var normal = new Vector3();
-        var reflectorWorldPosition = new Vector3();
-        var cameraWorldPosition = new Vector3();
-        var rotationMatrix = new Matrix4();
-        var lookAtPosition = new Vector3(0, 0, -1);
-        var clipPlane = new Vector4();
+        var reflectorPlane = new THREE.Plane();
+        var normal = new THREE.Vector3();
+        var reflectorWorldPosition = new THREE.Vector3();
+        var cameraWorldPosition = new THREE.Vector3();
+        var rotationMatrix = new THREE.Matrix4();
+        var lookAtPosition = new THREE.Vector3(0, 0, -1);
+        var clipPlane = new THREE.Vector4();
 
-        var view = new Vector3();
-        var target = new Vector3();
-        var q = new Vector4();
+        var view = new THREE.Vector3();
+        var target = new THREE.Vector3();
+        var q = new THREE.Vector4();
 
-        var textureMatrix = new Matrix4();
-        var virtualCamera = new PerspectiveCamera();
+        var textureMatrix = new THREE.Matrix4();
+        var virtualCamera = new THREE.PerspectiveCamera();
 
         var parameters = {
-            minFilter: LinearFilter,
-            magFilter: LinearFilter,
-            format: RGBFormat,
+            minFilter: THREE.LinearFilter,
+            magFilter: THREE.LinearFilter,
+            format: THREE.RGBFormat,
             stencilBuffer: false
         };
 
-        var renderTarget = new WebGLRenderTarget(textureWidth, textureHeight, parameters);
+        var renderTarget = new THREE.WebGLRenderTarget(textureWidth, textureHeight, parameters);
 
-        if (!_Math.isPowerOfTwo(textureWidth) || !_Math.isPowerOfTwo(textureHeight)) {
+        if (!isPowerOfTwo(textureWidth) || !isPowerOfTwo(textureHeight)) {
 
             renderTarget.texture.generateMipmaps = false;
 
         }
 
-        var material = new ShaderMaterial({
-            uniforms: UniformsUtils.clone(shader.uniforms),
+        var material = new THREE.ShaderMaterial({
+            uniforms: THREE.UniformsUtils.clone(shader.uniforms),
             fragmentShader: shader.fragmentShader,
             vertexShader: shader.vertexShader
         });
@@ -190,8 +193,9 @@ class Reflector extends THREE.Mesh {
 
     };
 
-    prototype = Object.create(super.prototype);
-
+    /*
+        prototype = Object.create(super.prototype);
+    */
 
     ReflectorShader = {
 
@@ -249,5 +253,5 @@ class Reflector extends THREE.Mesh {
             '}'
         ].join('\n')
     };
-
 }
+
