@@ -14,7 +14,7 @@ class Snow {
                 map: texture, color: 0xffffff,
                 transparent: true
             });
-            for (let p = 0; p < 20000; p++) {
+            for (let p = 0; p < 2000; p++) {
                 let snow = new THREE.Sprite(snowMaterial);
                 snow.position.set(
                     Math.random() * terrainWidth - terrainWidth / 2,
