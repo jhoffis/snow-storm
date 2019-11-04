@@ -2,14 +2,14 @@
  * @author Mugen87 / https://github.com/Mugen87
  *
  * References:
- *	http://www.valvesoftware.com/publications/2010/siggraph2010_vlachos_waterflow.pdf
- * 	http://graphicsrunner.blogspot.de/2010/08/water-using-flow-maps.html
+ *    http://www.valvesoftware.com/publications/2010/siggraph2010_vlachos_waterflow.pdf
+ *    http://graphicsrunner.blogspot.de/2010/08/water-using-flow-maps.html
  *
  */
-class Water_S extends THREE.Mesh{
-    reflector = new Reflector();
-    refractor = new Refractor();
-    constructor (geometry, options) {
+class Water_S extends THREE.Mesh {
+    constructor(geometry, options) {
+        reflector = new Reflector();
+        refractor = new Refractor();
 
         super(geometry);
 
@@ -19,7 +19,7 @@ class Water_S extends THREE.Mesh{
 
         options = options || {};
 
-        var color = (options.color !== undefined) ? new THREE.Color(options.color) : new THREE.Color(0x000000);
+        var color = new THREE.Color(options.color);
         var textureWidth = options.textureWidth || 512;
         var textureHeight = options.textureHeight || 512;
         var clipBias = options.clipBias || 0;
@@ -73,9 +73,9 @@ class Water_S extends THREE.Mesh{
 
         // material
 
-        this.material = new THREE.ShaderMaterial({
-            uniforms: THREE.UniformsUtils.merge([
-                THREE.UniformsLib['fog'],
+        this.material = new ShaderMaterial({
+            uniforms: UniformsUtils.merge([
+                UniformsLib['fog'],
                 shader.uniforms
             ]),
             vertexShader: shader.vertexShader,
@@ -186,9 +186,10 @@ class Water_S extends THREE.Mesh{
         };
 
     };
-/*
-    prototype = Object.create(super.prototype);
-*/
+
+    /*
+        prototype = Object.create(super.prototype);
+    */
     WaterShader = {
 
         uniforms: {

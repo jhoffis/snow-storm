@@ -24,7 +24,6 @@ window.addEventListener('resize', () => {
 }, false);
 
 
-
 /**
  * Add canvas element to DOM.
  */
@@ -128,21 +127,23 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
      */
 
 
-
     // Gjenstående ting av Sondre sine trær, om nødvendig
     //let tree = new Tree(terrainGeometry, terrainWidth, scene);
 
 
     //AxesHelper ikke i bruk per nå
-    var axesHelper = new THREE.AxesHelper( 5 );
-    scene.add( axesHelper );
+    var axesHelper = new THREE.AxesHelper(5);
+    scene.add(axesHelper);
 });
 
 
 let snow = new Snow(terrainWidth, scene);
 let ice = new Ice(terrainWidth, scene);
-
-
+/*
+let waterGeometry = new PlaneBufferGeometry(terrainWidth, terrainWidth);
+let water = new Water_S(waterGeometry, {color: 0xFF0000
+})
+*/
 
 /**
  * Set up camera controller:
@@ -188,11 +189,11 @@ window.addEventListener('keydown', (e) => {
     } else if (e.code === 'KeyD') {
         character.move.right = true;
         e.preventDefault();
-    }else if (e.keyCode === 32){
+    } else if (e.keyCode === 32) {
         character.move.up = true;
         e.preventDefault();
-    }else if (e.code === 'ctrlKey'){
-        character.move.down =true;
+    } else if (e.keyCode === 17) {
+        character.move.down = true;
         e.preventDefault();
     }
 
@@ -203,16 +204,22 @@ window.addEventListener('keyup', (e) => {
         character.move.forward = false;
         e.preventDefault();
     } else if (e.code === 'KeyS') {
-        character. move.backward = false;
+        character.move.backward = false;
         e.preventDefault();
     } else if (e.code === 'KeyA') {
-        character. move.left = false;
+        character.move.left = false;
         e.preventDefault();
     } else if (e.code === 'KeyD') {
         character.move.right = false;
         e.preventDefault();
     } else if (e.code === 'KeyF') {
         character.freeCam();
+        e.preventDefault();
+    } else if (e.keyCode === 17) {
+        character.move.down = false;
+        e.preventDefault();
+    } else if (e.keyCode === 32) {
+        character.move.up = false;
         e.preventDefault();
     }
 });
@@ -244,7 +251,6 @@ window.addEventListener('keyup', (e) => {
 // );
 
 
-
 let then = performance.now();
 
 function loop(now) {
@@ -262,15 +268,14 @@ function loop(now) {
     // apply rotation to velocity vector, and translate moveNode with it.
 
 
-
     // animate cube rotation:
     cube.rotation.x += 0.01;
     cube.rotation.y += 0.01;
 
 
-    snow.fall(1,  character.camera);
+    snow.fall(1, character.camera);
     // render scene:
-    renderer.render(scene,  character.camera);
+    renderer.render(scene, character.camera);
 
     requestAnimationFrame(loop);
 
@@ -278,8 +283,7 @@ function loop(now) {
 //Gun
 
 
-
 //Trestubbe
-let treeStub = new ExternalObject(scene, 'res/models/tre1/scene.gltf',0.5, -9, 20, 0 );
+let treeStub = new ExternalObject(scene, 'res/models/tre1/scene.gltf', 0.5, -9, 20, 0);
 
 loop(performance.now());
