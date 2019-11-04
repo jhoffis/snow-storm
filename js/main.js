@@ -284,6 +284,6 @@ function loop(now) {
 
 
 //Trestubbe
-let treeStub = new ExternalObject(scene, 'res/models/tre1/scene.gltf', 0.5, -9, 20, 0);
 
+new WorldObjects()
 loop(performance.now());
