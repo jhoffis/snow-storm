@@ -11,7 +11,7 @@ class Ice {
             textureHeight: 1024,
             flowSpeed: 0.01
         });
-        water.position.y = 15;
+        water.position.y = 12;
         water.rotation.x = Math.PI * - 0.5;
         scene.add(water);
     }
