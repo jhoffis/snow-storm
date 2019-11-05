@@ -139,11 +139,7 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
 
 let snow = new Snow(terrainWidth, scene);
 let ice = new Ice(terrainWidth, scene);
-/*
-let waterGeometry = new PlaneBufferGeometry(terrainWidth, terrainWidth);
-let water = new Water_S(waterGeometry, {color: 0xFF0000
-})
-*/
+
 
 /**
  * Set up camera controller:
