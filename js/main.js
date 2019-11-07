@@ -113,6 +113,9 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
     scene.add(terrain);
 
 
+
+    new WorldObjects(terrainGeometry, terrainWidth);
+
 //MIDLERTIDIG SKYBOX --FUNKER, men kan gjøres bedre
     /*
     const loader = new CubeTextureLoader();
@@ -285,5 +288,5 @@ function loop(now) {
 
 //Trestubbe
 
-new WorldObjects()
+
 loop(performance.now());
