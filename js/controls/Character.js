@@ -121,5 +121,9 @@ class Character {
 
     }
 
+    get characterheight(){
+        return this.camera.position.y;
+    }
+
 
 }
