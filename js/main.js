@@ -46,7 +46,6 @@ directionalLight.shadow.camera.far = 500;     // default
 scene.add(directionalLight);
 
 
-
 const geometry = new THREE.BoxBufferGeometry(1, 1, 1);
 const material = new THREE.MeshPhongMaterial({color: 0x00ff00});
 const cube = new THREE.Mesh(geometry, material);
@@ -112,7 +111,6 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
 
     scene.add(terrain);
 
-
 //MIDLERTIDIG SKYBOX --FUNKER, men kan gjøres bedre
     /*
     const loader = new CubeTextureLoader();
@@ -141,8 +139,8 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
 
 let snow = new Snow(terrainWidth, scene);
 let ice = new Ice(terrainWidth, scene);
-let water = new Water(terrainWidth);
-let fog = new Fog(character, ice);
+let water = new Water();
+//let fog = new Fog(character, ice);
 
 
 /**
