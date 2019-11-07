@@ -193,6 +193,9 @@ window.addEventListener('keydown', (e) => {
     } else if (e.keyCode === 17) {
         character.move.down = true;
         e.preventDefault();
+    } else if (e.keyCode === 16) {
+        character.move.run = true;
+        e.preventDefault();
     }
 
 });
@@ -218,6 +221,9 @@ window.addEventListener('keyup', (e) => {
         e.preventDefault();
     } else if (e.keyCode === 32) {
         character.move.up = false;
+        e.preventDefault();
+    } else if (e.keyCode === 16) {
+        character.move.run = false;
         e.preventDefault();
     }
 });

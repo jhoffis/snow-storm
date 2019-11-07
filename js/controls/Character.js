@@ -14,6 +14,7 @@ class Character {
             right: false,
             up: false,
             down: false,
+            run: false,
             speed: 0.01
         };
 
