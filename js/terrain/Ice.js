@@ -1,13 +1,15 @@
 "use strict";
 
 class Ice {
-    waterHeight = 10;
+
 
     constructor(terrainWidth, scene) {
+        let waterHeight = 10;
+        let waterSize = 2000;
         let waterGeometry = new THREE.PlaneBufferGeometry(terrainWidth, terrainWidth);
         let water = new Water_S(waterGeometry, {
             color: 0xffffff,
-            scale: 4,
+            scale: 100,
             textureWidth: 1024,
             textureHeight: 1024,
             flowSpeed: 0.01
@@ -18,4 +20,7 @@ class Ice {
 
     }
 
+    get waterHeight() {
+        return this.waterHeight;
+    }
 }

@@ -46,7 +46,6 @@ directionalLight.shadow.camera.far = 500;     // default
 scene.add(directionalLight);
 
 
-
 const geometry = new THREE.BoxBufferGeometry(1, 1, 1);
 const material = new THREE.MeshPhongMaterial({color: 0x00ff00});
 const cube = new THREE.Mesh(geometry, material);
@@ -111,10 +110,6 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
     terrain.receiveShadow = true;
 
     scene.add(terrain);
-
-
-
-    new WorldObjects(terrainGeometry, terrainWidth);
 
 //MIDLERTIDIG SKYBOX --FUNKER, men kan gjøres bedre
     /*
@@ -198,6 +193,9 @@ window.addEventListener('keydown', (e) => {
     } else if (e.keyCode === 17) {
         character.move.down = true;
         e.preventDefault();
+    } else if (e.keyCode === 16) {
+        character.move.run = true;
+        e.preventDefault();
     }
 
 });
@@ -223,6 +221,9 @@ window.addEventListener('keyup', (e) => {
         e.preventDefault();
     } else if (e.keyCode === 32) {
         character.move.up = false;
+        e.preventDefault();
+    } else if (e.keyCode === 16) {
+        character.move.run = false;
         e.preventDefault();
     }
 });
@@ -288,5 +289,5 @@ function loop(now) {
 
 //Trestubbe
 
-
+new WorldObjects()
 loop(performance.now());

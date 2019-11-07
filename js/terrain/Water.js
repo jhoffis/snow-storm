@@ -1,10 +1,10 @@
 "use strict"
 class Water{
 
-    constructor () {
+    constructor (terrainWidth) {
 
 
-        let geo = new THREE.PlaneBufferGeometry(2000, 2000, 8, 8);
+        let geo = new THREE.PlaneBufferGeometry(terrainWidth, terrainWidth, 8, 8);
         const water = new THREE.TextureLoader().load('res/textures/water_02.jpg');
         let mat = new THREE.MeshBasicMaterial({map: water, side: THREE.DoubleSide,transparent: true, opacity: 0.75});
 
