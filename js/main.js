@@ -139,7 +139,7 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
 
 let snow = new Snow(terrainWidth, scene);
 let ice = new Ice(terrainWidth, scene);
-let water = new Water();
+let water = new Water(terrainWidth);
 //let fog = new Fog(character, ice);
 
 
@@ -289,5 +289,5 @@ function loop(now) {
 
 //Trestubbe
 
-new WorldObjects()
+//new WorldObjects()
 loop(performance.now());

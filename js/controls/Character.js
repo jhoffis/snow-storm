@@ -18,7 +18,7 @@ class Character {
             speed: 0.01
         };
 
-        this.gun = new ExternalObject(this.camera,'res/models/gun.gltf');
+        this.gun = new ExternalObject(this.camera, 'res/models/gun.gltf');
         this.gun.addPosition(new THREE.Vector3(0, 0, -10))
 
         this.fall = 0;
@@ -62,19 +62,19 @@ class Character {
                 this.velocity.y -= moveSpeed;
             }
         } else {
-            // if (this.move.up) {
-            //     this.velocity.y += moveSpeed;
-            // }
-            // if (this.move.down) {
-            //     this.velocity.y -= moveSpeed;
-            // }
+            if (this.move.up) {
+                this.velocity.y += moveSpeed;
+            }
+            if (this.move.down) {
+                this.velocity.y -= moveSpeed;
+            }
 
         }
 
         this.velocity.applyQuaternion(this.camera.quaternion);
         this.camera.position.add(this.velocity);
 
-        if (terrainGeometry != null) {
+        if (terrainGeometry != null && !this.freecam) {
             let heightCam = terrainGeometry.getHeightAtPrecise(this.camera.position.clone());
             if (heightCam < 200)
                 this.camera.position.y = heightCam + 2;
@@ -122,7 +122,7 @@ class Character {
 
     }
 
-    get characterheight(){
+    get characterheight() {
         return this.camera.position.y;
     }
 
