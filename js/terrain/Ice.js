@@ -1,8 +1,9 @@
 "use strict";
 
 class Ice {
+    waterHeight = 10;
 
-    constructor(terrainWidth, scene){
+    constructor(terrainWidth, scene) {
         let waterGeometry = new THREE.PlaneBufferGeometry(terrainWidth, terrainWidth);
         let water = new Water_S(waterGeometry, {
             color: 0xffffff,
@@ -11,8 +12,10 @@ class Ice {
             textureHeight: 1024,
             flowSpeed: 0.01
         });
-        water.position.y = 12;
-        water.rotation.x = Math.PI * - 0.5;
+        water.position.y = this.waterHeight;
+        water.rotation.x = Math.PI * -0.5;
         scene.add(water);
+
     }
+
 }
