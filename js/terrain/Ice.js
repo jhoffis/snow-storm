@@ -19,8 +19,10 @@ class Ice {
         scene.add(water);
 
     }
-
+/*
     get waterHeight() {
         return this.waterHeight;
     }
+
+ */
 }
