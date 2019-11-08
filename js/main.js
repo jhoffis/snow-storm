@@ -140,7 +140,8 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
 let snow = new Snow(terrainWidth, scene);
 let ice = new Ice(terrainWidth, scene);
 let water = new Water(terrainWidth);
-//let fog = new Fog(character, ice);
+
+
 
 
 /**
@@ -276,6 +277,8 @@ function loop(now) {
     cube.rotation.x += 0.01;
     cube.rotation.y += 0.01;
 
+    let fog = new Fog(character, ice);
+    scene.fog = fog;
 
     snow.fall(1, character.camera);
     // render scene:

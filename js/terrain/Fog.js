@@ -2,16 +2,19 @@
 class Fog{
     constructor(character, water){
         let fog = null;
-        let waterHeight = water.waterHeight;
+        let waterHeight = 10;
         if (character.characterheight > waterHeight){
-            fog = new THREE.fogExp2(0xD6D7D2, 0.0025);
-
+            fog = new THREE.FogExp2(0xD6D7D2, 0.025);
         } else {
-
-            fog = new THREE.fogExp2(0x00000, 1);
-
+            fog = new THREE.FogExp2(0x3475E9, 0.25);
+            /*
+            Other possible colors:
+            2ABCB2
+            4094FF
+            3475E9
+             */
         }
-        scene.add(fog);
+        return fog;
 
     }
 }

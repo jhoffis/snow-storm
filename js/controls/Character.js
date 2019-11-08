@@ -74,7 +74,7 @@ class Character {
         this.velocity.applyQuaternion(this.camera.quaternion);
         this.camera.position.add(this.velocity);
 
-        if (terrainGeometry != null) {
+        if (terrainGeometry != null && !this.freecam) {
             let heightCam = terrainGeometry.getHeightAtPrecise(this.camera.position.clone());
             if (heightCam < 200)
                 this.camera.position.y = heightCam + 2;
@@ -121,10 +121,10 @@ class Character {
         // nanobot.position.set(x1, y1, z1 );
 
     }
-/*
+
     get characterheight() {
         return this.camera.position.y;
     }
-*/
+
 
 }
