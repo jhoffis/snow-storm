@@ -136,7 +136,7 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
     scene.add(axesHelper);
 });
 
-
+// Adding snow and water, where ice is the upper layer of water
 let snow = new Snow(terrainWidth, scene);
 let ice = new Ice(terrainWidth, scene);
 let water = new Water(terrainWidth);
@@ -277,6 +277,7 @@ function loop(now) {
     cube.rotation.x += 0.01;
     cube.rotation.y += 0.01;
 
+    // adding fog
     let fog = new Fog(character, ice);
     scene.fog = fog;
 
@@ -292,5 +293,5 @@ function loop(now) {
 
 //Trestubbe
 
-//new WorldObjects()
+//new WorldObjects();
 loop(performance.now());
