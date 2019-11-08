@@ -2,8 +2,7 @@
 class Fog{
     constructor(character, water){
         let fog = null;
-        let waterHeight = 10;
-        if (character.characterheight > waterHeight){
+        if (character.characterheight > water.waterHeight){
             fog = new THREE.FogExp2(0xD6D7D2, 0.025);
         } else {
             fog = new THREE.FogExp2(0x3475E9, 0.25);

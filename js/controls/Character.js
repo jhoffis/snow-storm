@@ -5,6 +5,7 @@ class Character {
     constructor() {
         const cameraFOV = 75;
         this.camera = new THREE.PerspectiveCamera(cameraFOV, window.innerWidth / window.innerHeight, 0.1, 1000);
+        scene.add(this.camera)
         this.freecam = false;
         this.velocity = new THREE.Vector3(0.0, 0.0, 0.0);
         this.move = {
@@ -15,10 +16,10 @@ class Character {
             up: false,
             down: false,
             run: false,
-            speed: 0.01
+            speed: 0.007
         };
 
-        this.gun = new ExternalObject(this.camera, 'res/models/gun.gltf');
+        this.gun = new ExternalObject(this.camera,'res/models/gun.gltf');
         this.gun.addPosition(new THREE.Vector3(0, 0, -10))
 
         this.fall = 0;
@@ -33,11 +34,29 @@ class Character {
     }
 
     movement(delta) {
-        const moveSpeed = this.move.speed * delta;
+        let moveSpeed = this.move.speed * delta;
 
         this.velocity.set(0.0, 0.0, 0.0);
 
+        if (this.freecam) {
+            if (this.move.up) {
+                this.velocity.y += moveSpeed;
+            }
+            if (this.move.down) {
+                this.velocity.y -= moveSpeed;
+            }
+        } else {
+            // if (this.move.up) {
+            //     this.velocity.y += moveSpeed;
+            // }
+            // if (this.move.down) {
+            //     this.velocity.y -= moveSpeed;
+            // }
 
+        }
+        if(this.move.run){
+            moveSpeed = moveSpeed * 2;
+        }
         if (this.move.left) {
             this.velocity.x -= moveSpeed;
         }
@@ -54,22 +73,6 @@ class Character {
             this.velocity.z += moveSpeed;
         }
 
-        if (this.freecam) {
-            if (this.move.up) {
-                this.velocity.y += moveSpeed;
-            }
-            if (this.move.down) {
-                this.velocity.y -= moveSpeed;
-            }
-        } else {
-            if (this.move.up) {
-                this.velocity.y += moveSpeed;
-            }
-            if (this.move.down) {
-                this.velocity.y -= moveSpeed;
-            }
-
-        }
 
         this.velocity.applyQuaternion(this.camera.quaternion);
         this.camera.position.add(this.velocity);
@@ -122,7 +125,7 @@ class Character {
 
     }
 
-    get characterheight() {
+    get characterheight(){
         return this.camera.position.y;
     }
 

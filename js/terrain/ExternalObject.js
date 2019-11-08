@@ -1,6 +1,6 @@
 "use strict";
 
-class ExternalObject {
+class ExternalObject{
 
     constructor(scene, url, size, posX, posY, posZ) {
 
