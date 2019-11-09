@@ -74,6 +74,7 @@ class Character {
 
         this.fall = 0;
         this.jump = 0;
+        this.heightOfCharacter = 2
 
         this.mouseLookController = new MouseLookController(this.camera);
 
@@ -85,7 +86,7 @@ class Character {
 
     movement(delta) {
         let moveSpeed = this.move.speed * delta;
-
+        let charHeight = this.heightOfCharacter;
         this.velocity.set(0.0, 0.0, 0.0);
 
         if (this.freecam) {
@@ -96,12 +97,14 @@ class Character {
                 this.velocity.y -= moveSpeed;
             }
         } else {
-            // if (this.move.up) {
-            //     this.velocity.y += moveSpeed;
-            // }
-            // if (this.move.down) {
-            //     this.velocity.y -= moveSpeed;
-            // }
+            if (this.move.down) {
+                //Croutch
+                charHeight = charHeight * 2 / 3;
+                moveSpeed = moveSpeed / 2;
+            }
+            if (this.move.up) {
+             //Jump
+            }
 
         }
 
@@ -118,7 +121,7 @@ class Character {
             }
         }
 
-        if (this.move.run) {
+        if (this.move.run && !this.move.down) {
             moveSpeed = moveSpeed * 2;
         }
 
@@ -182,48 +185,8 @@ class Character {
         if (terrainGeometry != null && !this.freecam) {
             let heightCam = terrainGeometry.getHeightAtPrecise(this.camera.position.clone());
             if (heightCam < 200)
-                this.camera.position.y = heightCam + 2;
+                this.camera.position.y = heightCam + charHeight;
         }
-
-
-        // this.gun.position(this.camera.position.x, this.camera.position.y, this.camera.position.z)
-        // this.gun.rotate(this.camera.rotation.x, this.camera.rotation.y, this.camera.rotation.z)
-        // var cx, cy, cz, lx, ly, lz;
-        //
-        // dir.set(0,0,-1);
-        // dir.applyAxisAngle(0,camera.rotation.x);
-        // dir.applyAxisAngle(1,camera.rotation.y);
-        // dir.applyAxisAngle(2,camera.rotation.z);
-        // var dist = 100;
-        //
-        // let cx = this.camera.position.x;
-        // let cy = this.camera.position.y;
-        // let cz = this.camera.position.z;
-        //
-        // let lx = dir.x;
-        // let ly = dir.y;
-        // let lz = dir.z;
-        //
-        //
-        // var l;
-        //
-        // l = Math.sqrt((dist*dist)/(lx*lx+ly*ly+lz*lz));
-        //
-        // var x1, x2;
-        // var y1, y2;
-        // var z1, z2;
-        //
-        // x1 = cx + lx*l;
-        // x2 = cx - lx*l;
-        //
-        // y1 = cy + ly*l;
-        // y2 = cy - ly*l;
-        //
-        // z1 = cz + lz*l;
-        // z2 = cz - lz*l;
-        //
-        //
-        // nanobot.position.set(x1, y1, z1 );
 
     }
 

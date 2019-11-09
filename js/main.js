@@ -193,7 +193,7 @@ window.addEventListener('keydown', (e) => {
     } else if (e.keyCode === 32) {
         character.move.up = true;
         e.preventDefault();
-    } else if (e.keyCode === 17) {
+    } else if (e.keyCode === 67) {
         character.move.down = true;
         e.preventDefault();
     } else if (e.keyCode === 16) {
@@ -219,7 +219,7 @@ window.addEventListener('keyup', (e) => {
     } else if (e.code === 'KeyF') {
         character.freeCam();
         e.preventDefault();
-    } else if (e.keyCode === 17) {
+    } else if (e.keyCode === 67) {
         character.move.down = false;
         e.preventDefault();
     } else if (e.keyCode === 32) {
