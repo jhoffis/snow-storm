@@ -142,8 +142,6 @@ let ice = new Ice(terrainWidth, scene);
 let water = new Water(terrainWidth);
 
 
-
-
 /**
  * Set up camera controller:
  */
@@ -154,7 +152,11 @@ let water = new Water(terrainWidth);
 const canvas = renderer.domElement;
 
 canvas.addEventListener('click', () => {
-    canvas.requestPointerLock();
+    if (document.pointerLockElement === canvas) {
+        character.shoot();
+    } else {
+        canvas.requestPointerLock();
+    }
 });
 
 let yaw = 0;

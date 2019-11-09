@@ -5,6 +5,7 @@ class Character {
     constructor() {
         const cameraFOV = 75;
         this.camera = new THREE.PerspectiveCamera(cameraFOV, window.innerWidth / window.innerHeight, 0.1, 1000);
+        ;
         scene.add(this.camera)
         this.freecam = false;
         this.velocity = new THREE.Vector3(0.0, 0.0, 0.0);
@@ -19,8 +20,57 @@ class Character {
             speed: 0.007
         };
 
-        this.gun = new ExternalObject(this.camera,'res/models/gun.gltf');
-        this.gun.addPosition(new THREE.Vector3(0, 0, -10))
+        this.gun = new ExternalObject(this.camera, 'res/models/gun.gltf');
+        this.standardGunPosition = new THREE.Vector3(0.5, -0.3, -1)
+        this.gunMoveAmount = 0.0;
+        this.gunMoveDirection = 1;
+        this.gun.position.set(this.standardGunPosition.x, this.standardGunPosition.y, this.standardGunPosition.z)
+        this.gunPlaced = false;
+
+        this.standardGunRotation = new THREE.Vector3(0, -0.2, Math.PI)
+        this.gun.rotation.set(this.standardGunRotation.x, this.standardGunRotation.y, this.standardGunRotation.z);
+        this.gunShootAmount = 0;
+        this.shooting = false;
+
+        let loader = new THREE.TextureLoader();
+        let parent = this;
+        loader.load("res/textures/gunflash.png", function (texture) {
+
+            let gunflashMaterial = new THREE.SpriteMaterial({
+                map: texture, color: 0xffffff,
+                transparent: true
+            });
+
+            parent.gunflash = new THREE.Sprite(gunflashMaterial);
+            parent.gunflash.position.set(
+                0,
+                0,
+                -1
+            );
+            parent.gunflash.material.opacity = 0;
+            parent.gun.add(parent.gunflash);
+        });
+
+        loader.load("res/textures/crosshair.png", function (texture) {
+
+            texture.magFilter = THREE.NearestFilter;
+
+            let crosshairMaterial = new THREE.SpriteMaterial({
+                map: texture, color: 0xffffff,
+                transparent: true
+            });
+
+            let crosshair = new THREE.Sprite(crosshairMaterial);
+            crosshair.position.set(
+                0,
+                0,
+                -0.1
+            );
+            let scale = 0.005
+            crosshair.scale.set(scale, scale, scale)
+            parent.camera.add(crosshair);
+        });
+
 
         this.fall = 0;
         this.jump = 0;
@@ -54,25 +104,77 @@ class Character {
             // }
 
         }
-        if(this.move.run){
+
+        if (this.shooting) {
+
+            this.gunShootAmount += moveSpeed * 2;
+            this.gun.rotation.x = this.standardGunRotation.x - 0.4 * Math.pow(this.gunShootAmount, 2) + 0.4 * this.gunShootAmount;
+
+            if (this.gun.rotation.x < this.standardGunRotation.x) {
+                this.gun.rotation.set(this.standardGunRotation.x, this.standardGunRotation.y, this.standardGunRotation.z);
+                this.gunShootAmount = 0;
+                this.shooting = false
+            this.gunflash.material.opacity = 0;
+            }
+        }
+
+        if (this.move.run) {
             moveSpeed = moveSpeed * 2;
         }
+
+        let movement = false;
+
         if (this.move.left) {
             this.velocity.x -= moveSpeed;
+            movement = true;
         }
 
         if (this.move.right) {
             this.velocity.x += moveSpeed;
+            movement = true;
         }
 
         if (this.move.forward) {
             this.velocity.z -= moveSpeed;
+            movement = true;
         }
 
         if (this.move.backward) {
             this.velocity.z += moveSpeed;
+            movement = true;
         }
 
+        if (movement) {
+            if (this.gunPlaced)
+                this.gunPlaced = false;
+
+            let speed = moveSpeed / 2.2;
+            if (this.gunMoveDirection !== 1) {
+                speed = -speed;
+            }
+
+            this.gunMoveAmount += speed;
+
+            if (this.gunMoveAmount > 1) {
+                this.gunMoveAmount = 1;
+                this.gunMoveDirection = 0
+            } else if (this.gunMoveAmount < 0) {
+                this.gunMoveAmount = 0;
+                this.gunMoveDirection = 1;
+            }
+
+            this.gun.position.set(this.standardGunPosition.x - 0.2 * this.gunMoveAmount,
+                0.4 * Math.pow(this.gunMoveAmount, 2) - 0.4 * this.gunMoveAmount + this.standardGunPosition.y,
+                this.standardGunPosition.z)
+
+        } else if (!this.gunPlaced) {
+            //Reset gun movement
+            this.gun.position.set(this.standardGunPosition.x, this.standardGunPosition.y, this.standardGunPosition.z)
+            this.gunMoveAmount = 0;
+            this.gunMoveDirection = 1
+            this.gunPlaced = true;
+
+        }
 
         this.velocity.applyQuaternion(this.camera.quaternion);
         this.camera.position.add(this.velocity);
@@ -125,9 +227,16 @@ class Character {
 
     }
 
-    get characterheight(){
+    get characterheight() {
         return this.camera.position.y;
     }
 
+
+    shoot() {
+        this.gun.rotation.set(this.standardGunRotation.x, this.standardGunRotation.y, this.standardGunRotation.z);
+        this.gunShootAmount = 0;
+        this.shooting = true;
+        this.gunflash.material.opacity = 0.9
+    }
 
 }
