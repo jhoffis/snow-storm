@@ -271,7 +271,7 @@ function loop(now) {
     yaw = 0;
     pitch = 0;
 
-    character.movement(delta);
+    character.movement(delta, terrainGeometry);
     // apply rotation to velocity vector, and translate moveNode with it.
 
 

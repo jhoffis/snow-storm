@@ -5,7 +5,6 @@ class Character {
     constructor() {
         const cameraFOV = 75;
         this.camera = new THREE.PerspectiveCamera(cameraFOV, window.innerWidth / window.innerHeight, 0.1, 1000);
-        ;
         scene.add(this.camera)
         this.freecam = false;
         this.velocity = new THREE.Vector3(0.0, 0.0, 0.0);
@@ -72,9 +71,13 @@ class Character {
         });
 
 
-        this.fall = 0;
-        this.jump = 0;
-        this.heightOfCharacter = 2
+        this.fall = 0.0;
+        this.jump = false;
+        this.cannotJumpAgain = false
+        this.heightOfCharacter = 2.0
+        this.distanceBetweenFeetAndGround = 0.0;
+        this.upwardsMotion = 0
+        this.upwardsSpeed = 0.18;
 
         this.mouseLookController = new MouseLookController(this.camera);
 
@@ -84,9 +87,12 @@ class Character {
         this.freecam = !this.freecam;
     }
 
-    movement(delta) {
+    movement(delta, terrainGeometry) {
         let moveSpeed = this.move.speed * delta;
         let charHeight = this.heightOfCharacter;
+        let terrainHeightAtCamera = 0;
+        let sameHeight = 0;
+        let noRunning = false
         this.velocity.set(0.0, 0.0, 0.0);
 
         if (this.freecam) {
@@ -97,13 +103,47 @@ class Character {
                 this.velocity.y -= moveSpeed;
             }
         } else {
+            if (terrainGeometry != null)
+                terrainHeightAtCamera = terrainGeometry.getHeightAtPrecise(this.camera.position.clone());
+
+            if(this.characterheight < ice.waterHeight){
+                moveSpeed = moveSpeed * 2 / 5;
+                noRunning = true;
+            }
+
+
             if (this.move.down) {
                 //Croutch
+                noRunning = true;
                 charHeight = charHeight * 2 / 3;
                 moveSpeed = moveSpeed / 2;
             }
-            if (this.move.up) {
-             //Jump
+            if (this.move.up && !this.cannotJumpAgain) {
+                //Jump
+                this.jump = true;
+                this.cannotJumpAgain = true;
+                this.prevTerrainHeightAtCamera = terrainHeightAtCamera;
+            }
+
+            if (this.jump) {
+                this.upwardsMotion = this.upwardsMotion + this.upwardsSpeed * moveSpeed * 7
+                this.upwardsSpeed = this.upwardsSpeed / 3
+                this.distanceBetweenFeetAndGround += this.upwardsMotion - this.fall;
+
+                sameHeight = (this.prevTerrainHeightAtCamera - terrainHeightAtCamera);
+
+
+                if (this.characterheight - charHeight <= terrainHeightAtCamera && this.fall !== 0) {
+                    this.cannotJumpAgain = false;
+                    this.jump = false;
+                    this.distanceBetweenFeetAndGround = 0;
+                    this.fall = 0;
+                    this.upwardsMotion = 0
+                    this.prevTerrainHeightAtCamera = 0
+                    this.upwardsSpeed = 0.18;
+                } else {
+                    this.fall = (0.0016 * moveSpeed * 100 + this.fall)
+                }
             }
 
         }
@@ -117,11 +157,11 @@ class Character {
                 this.gun.rotation.set(this.standardGunRotation.x, this.standardGunRotation.y, this.standardGunRotation.z);
                 this.gunShootAmount = 0;
                 this.shooting = false
-            this.gunflash.material.opacity = 0;
+                this.gunflash.material.opacity = 0;
             }
         }
 
-        if (this.move.run && !this.move.down) {
+        if (this.move.run && !noRunning) {
             moveSpeed = moveSpeed * 2;
         }
 
@@ -182,10 +222,13 @@ class Character {
         this.velocity.applyQuaternion(this.camera.quaternion);
         this.camera.position.add(this.velocity);
 
-        if (terrainGeometry != null && !this.freecam) {
-            let heightCam = terrainGeometry.getHeightAtPrecise(this.camera.position.clone());
-            if (heightCam < 200)
-                this.camera.position.y = heightCam + charHeight;
+        if (!this.freecam) {
+            if (terrainHeightAtCamera < 200) {
+                this.camera.position.y = terrainHeightAtCamera + charHeight + this.distanceBetweenFeetAndGround + sameHeight;
+                if (this.characterheight - charHeight < terrainHeightAtCamera) {
+                    this.camera.position.y = terrainHeightAtCamera + charHeight
+                }
+            }
         }
 
     }
