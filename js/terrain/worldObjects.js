@@ -7,10 +7,14 @@ class WorldObjects {
 
           new ExternalObject(scene, 'res/models/tre2/scene.gltf',0.02, -10, 15, -10 );
   */     // console.log(random)
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 2; i++) {
 
             let random = new THREE.Vector3(Math.random() * width - width / 2, 0, Math.random() * width - width / 2);
             //let random = new THREE.Vector3(-3, 0, 9);
+
+
+
+
 
             let yOverWater = ice.waterHeight +1;
             let ybelowTop = terrainGeometry.height -5;
@@ -20,10 +24,32 @@ class WorldObjects {
 
 
             let y1 = terrainGeometry.getHeightAtPrecise(random);
+
             if (y1 < yOverWater) {
                 i--;
                 continue;
             }
+
+            console.log("y1 "+y1)
+            let xTestPluss = random.x+3
+            let xTestMinus = random.x-3
+
+            let zTestPluss = random.z+3
+            let zTestMinus = random.z-3
+
+            let xTestPHeight = terrainGeometry.getHeightAtPrecise(new THREE.Vector3(xTestPluss, 0, random.z))
+            let xTestMHeight = terrainGeometry.getHeightAtPrecise(new THREE.Vector3(xTestMinus, 0, random.z))
+
+            let zTestPHeight = terrainGeometry.getHeightAtPrecise(new THREE.Vector3(random.x, 0, zTestPluss))
+            let zTestMHeight = terrainGeometry.getHeightAtPrecise(new THREE.Vector3(random.x, 0, zTestMinus))
+
+            console.log("xTestPHeight "+xTestPHeight)
+            console.log("xTestMHeight "+xTestMHeight)
+            console.log("zTestPHeight "+zTestPHeight)
+            console.log("zTestMHeight "+zTestMHeight)
+
+
+
 
 
             console.log(y1)
