@@ -23,6 +23,7 @@ class Water_S extends THREE.Mesh {
         var color = new THREE.Color(options.color);
         var textureWidth = options.textureWidth || 512;
         var textureHeight = options.textureHeight || 512;
+
         var clipBias = options.clipBias || 0;
         var flowDirection = options.flowDirection || new THREE.Vector2(1, 0);
         var flowSpeed = options.flowSpeed || 0.00;

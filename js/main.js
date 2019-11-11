@@ -94,6 +94,7 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
     snowyRockTexture.wrapT = THREE.RepeatWrapping;
     snowyRockTexture.repeat.set(1500 / terrainWidth, 1500 / terrainWidth);
 
+    new WorldObjects(terrainGeometry ,terrainWidth);
 
     const splatMap = new THREE.TextureLoader().load('res/images/splatmap_01.png');
 

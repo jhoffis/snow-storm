@@ -12,7 +12,8 @@ class Snow {
 
             let snowMaterial = new THREE.SpriteMaterial({
                 map: texture, color: 0xffffff,
-                transparent: true
+                transparent: true,
+                depthWrite: false
             });
             for (let p = 0; p < 2000; p++) {
                 let snow = new THREE.Sprite(snowMaterial);
