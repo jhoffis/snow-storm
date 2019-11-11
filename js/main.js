@@ -94,7 +94,12 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
     snowyRockTexture.wrapT = THREE.RepeatWrapping;
     snowyRockTexture.repeat.set(1500 / terrainWidth, 1500 / terrainWidth);
 
-    new WorldObjects(terrainGeometry ,terrainWidth);
+
+
+   let trees =  new WorldObjects(terrainGeometry ,terrainWidth);
+console.log(trees)
+
+
 
     const splatMap = new THREE.TextureLoader().load('res/images/splatmap_01.png');
 
@@ -132,9 +137,7 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
     //let tree = new Tree(terrainGeometry, terrainWidth, scene);
 
 
-    //AxesHelper ikke i bruk per nå
-    var axesHelper = new THREE.AxesHelper(5);
-    scene.add(axesHelper);
+
 });
 
 // Adding snow and water, where ice is the upper layer of water
@@ -292,7 +295,8 @@ function loop(now) {
 
 };
 //Gun
-
+//var axesHelper = new THREE.AxesHelper(5);
+//scene.add(axesHelper);
 
 //Trestubbe
 

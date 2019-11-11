@@ -7,6 +7,8 @@ class ExternalObject extends THREE.Group{
 
         scene.add(this);
 
+
+
         let parent = this;
 
         let loader = new THREE.GLTFLoader();
@@ -15,6 +17,8 @@ class ExternalObject extends THREE.Group{
             parent.add(gltf.scene);
             parent.resize(size);
             parent.position.set(posX, posY, posZ);
+
+
 
         }, undefined, function (error) {
             console.error(error);
