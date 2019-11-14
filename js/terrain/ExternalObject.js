@@ -2,7 +2,7 @@
 
 class ExternalObject extends THREE.Group{
 
-    constructor(scene, url, size, posX, posY, posZ) {
+    constructor(scene, url, size, posX, posY, posZ, actionFunc) {
         super();
 
         scene.add(this);
@@ -17,6 +17,7 @@ class ExternalObject extends THREE.Group{
             parent.resize(size);
             parent.position.set(posX, posY, posZ);
 
+            actionFunc();
         }, undefined, function (error) {
             console.error(error);
         });
