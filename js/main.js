@@ -3,7 +3,10 @@
 const scene = new THREE.Scene();
 let character = new Character();
 
-const renderer = new THREE.WebGLRenderer();
+const canvas = document.createElement( 'canvas' );
+const context = canvas.getContext( 'webgl2', { alpha: false } );
+const renderer = new THREE.WebGLRenderer( { canvas: canvas, context: context } );
+
 renderer.setClearColor(0xffffff);
 renderer.setSize(window.innerWidth, window.innerHeight);
 
@@ -144,7 +147,7 @@ console.log(trees)
 // Adding snow and water, where ice is the upper layer of water
 let snow = new Snow(terrainWidth, scene);
 let ice = new Ice(terrainWidth, scene);
-let water = new Water(terrainWidth);
+// let water = new Water(terrainWidth);
 let shark = new Shark(scene)
 
 
@@ -158,7 +161,6 @@ let shark = new Shark(scene)
 
 // We attach a click lister to the canvas-element so that we can request a pointer lock.
 // https://developer.mozilla.org/en-US/docs/Web/API/Pointer_Lock_API
-const canvas = renderer.domElement;
 
 canvas.addEventListener('click', () => {
     if (document.pointerLockElement === canvas) {

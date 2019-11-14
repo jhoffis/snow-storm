@@ -37,7 +37,8 @@ class Character {
 
             let gunflashMaterial = new THREE.SpriteMaterial({
                 map: texture, color: 0xffffff,
-                transparent: true
+                transparent: true,
+                depthWrite: false
             });
 
             parent.gunflash = new THREE.Sprite(gunflashMaterial);
