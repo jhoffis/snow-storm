@@ -101,6 +101,7 @@ console.log(trees)
 
 
 
+
     const splatMap = new THREE.TextureLoader().load('res/images/splatmap_01.png');
 
     const terrainMaterial = new TextureSplattingMaterial({
@@ -144,6 +145,10 @@ console.log(trees)
 let snow = new Snow(terrainWidth, scene);
 let ice = new Ice(terrainWidth, scene);
 let water = new Water(terrainWidth);
+let shark = new Shark(scene)
+
+
+
 
 
 /**
@@ -269,6 +274,8 @@ function loop(now) {
     const delta = now - then;
     then = now;
 
+    if(shark != null && shark.mixer != null)
+        shark.mixer.update(delta)
 
     // update controller rotation.
     character.mouseLookController.update(pitch, yaw);

@@ -35,11 +35,11 @@ class WorldObjects {
 
             console.log("y1 "+y1)
 
-            let xTestPluss = random.x+6
-            let xTestMinus = random.x-6
+            let xTestPluss = random.x+3
+            let xTestMinus = random.x-3
 
-            let zTestPluss = random.z+6
-            let zTestMinus = random.z-6
+            let zTestPluss = random.z+3
+            let zTestMinus = random.z-3
 
             let xTestPHeight = terrainGeometry.getHeightAtPrecise(new THREE.Vector3(xTestPluss, 0, random.z))
             let xTestMHeight = terrainGeometry.getHeightAtPrecise(new THREE.Vector3(xTestMinus, 0, random.z))
@@ -49,8 +49,8 @@ class WorldObjects {
 
 
 
-            if (((Math.abs(y1) - Math.abs(xTestPHeight)) > 1.5) || ((Math.abs(y1) - Math.abs(xTestMHeight)) > 1.5) ||
-                ((Math.abs(y1) - Math.abs(zTestPHeight)) > 1.5) || ((Math.abs(y1) - Math.abs(zTestMHeight)) > 1.5) || (y1 < yOverWater)) {
+            if (((Math.abs(y1) - Math.abs(xTestPHeight)) > 2.5) || ((Math.abs(y1) - Math.abs(xTestMHeight)) > 2.5) ||
+                ((Math.abs(y1) - Math.abs(zTestPHeight)) > 2.5) || ((Math.abs(y1) - Math.abs(zTestMHeight)) > 2.5) || (y1 < yOverWater)) {
                 i--;
                 continue;
             }
@@ -77,7 +77,7 @@ class WorldObjects {
                 new ExternalObject(scene, 'res/models/tre2/scene2.gltf', 3, random.x, random.y, random.z);
 
 
-            scene.add(cube)
+           // scene.add(cube)
             //console.log(cube.position)
             //AxesHelper ikke i bruk per nå
             //var axesHelper = new THREE.AxesHelper(5);
