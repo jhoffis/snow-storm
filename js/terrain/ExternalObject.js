@@ -17,7 +17,9 @@ class ExternalObject extends THREE.Group{
             parent.resize(size);
             parent.position.set(posX, posY, posZ);
 
-            actionFunc();
+            if (typeof actionFunc === "function") {
+                actionFunc();
+            }
         }, undefined, function (error) {
             console.error(error);
         });
