@@ -275,7 +275,7 @@ function loop(now) {
     then = now;
 
     if(shark != null && shark.mixer != null)
-        shark.mixer.update(delta)
+        shark.mixer.update(delta / 1500)
 
     // update controller rotation.
     character.mouseLookController.update(pitch, yaw);
