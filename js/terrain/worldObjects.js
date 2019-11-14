@@ -82,6 +82,7 @@ class WorldObjects {
             //AxesHelper ikke i bruk per nå
             //var axesHelper = new THREE.AxesHelper(5);
             //cube.add(axesHelper);
+            //
         }
     }
 
