@@ -20,7 +20,7 @@ class ExternalObject extends THREE.Group{
             if (typeof actionFunc === "function") {
                 actionFunc();
             } else {
-                console.log("THERE IS NO ACTION FUNCTION")
+                console.log("THERE IS NO ACTION FUNCTION USING: " + url)
             }
         }, undefined, function (error) {
             console.error(error);
