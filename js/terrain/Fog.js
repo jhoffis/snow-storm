@@ -8,12 +8,15 @@ class Fog {
             fog = new THREE.FogExp2(0xD6D7D2, 0.025);
         } else {
             // Fog for the "waterfog"
-            fog = new THREE.FogExp2(0x3475E9, 0.15);
+            fog = new THREE.FogExp2(0x75c7d2, 0.15);
             /*
             Other possible colors:
             2ABCB2
             4094FF
             3475E9
+            61a9e8
+            75c7bd
+            75c7d2
              */
         }
         return fog;
