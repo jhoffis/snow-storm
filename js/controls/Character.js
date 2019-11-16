@@ -166,29 +166,29 @@ class Character {
             moveSpeed = moveSpeed * 2;
         }
 
-        let movement = false;
+        let bobbing = false;
 
         if (this.move.left) {
             this.velocity.x -= moveSpeed;
-            movement = true;
+            bobbing = true;
         }
 
         if (this.move.right) {
             this.velocity.x += moveSpeed;
-            movement = true;
+            bobbing = true;
         }
 
         if (this.move.forward) {
             this.velocity.z -= moveSpeed;
-            movement = true;
+            bobbing = true;
         }
 
         if (this.move.backward) {
             this.velocity.z += moveSpeed;
-            movement = true;
+            bobbing = true;
         }
 
-        if (movement) {
+        if (bobbing) {
             if (this.gunPlaced)
                 this.gunPlaced = false;
 

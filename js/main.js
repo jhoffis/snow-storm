@@ -147,7 +147,7 @@ console.log(trees)
 // Adding snow and water, where ice is the upper layer of water
 let snow = new Snow(terrainWidth, scene);
 let ice = new Ice(terrainWidth, scene);
-// let water = new Water(terrainWidth);
+let water = new Water(terrainWidth);
 let shark = new Shark(scene)
 
 
