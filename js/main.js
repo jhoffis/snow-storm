@@ -154,6 +154,7 @@ let shark = new Shark(scene)
 
 
 
+
 /**
  * Set up camera controller:
  */
@@ -271,13 +272,27 @@ window.addEventListener('keyup', (e) => {
 
 let then = performance.now();
 
+
+
 function loop(now) {
 
     const delta = now - then;
     then = now;
 
-    if(shark != null && shark.mixer != null)
+    if (shark != null && shark.mixer != null){
         shark.mixer.update(delta / 1500)
+    shark.sharkMove()
+}
+
+
+
+
+
+
+
+
+
+   // this.object.position.y += velo.y;
 
     // update controller rotation.
     character.mouseLookController.update(pitch, yaw);

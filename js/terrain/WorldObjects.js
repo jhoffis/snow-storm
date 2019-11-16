@@ -55,6 +55,7 @@ class WorldObjects {
                 continue;
             }
 
+            /*
             console.log("xTestPHeight "+xTestPHeight)
             console.log("xTestMHeight "+xTestMHeight)
             console.log("zTestPHeight "+zTestPHeight)
@@ -64,6 +65,8 @@ class WorldObjects {
 
 
             console.log(y1)
+
+             */
 
             random.y = y1;
 
