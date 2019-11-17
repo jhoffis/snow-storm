@@ -66,7 +66,7 @@ sharkMove() {
 
 
 
-    console.log(this.object.position.x)
+    //console.log(this.object.position.x)
 }
 
 }

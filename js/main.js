@@ -32,7 +32,7 @@ window.addEventListener('resize', () => {
  */
 document.body.appendChild(renderer.domElement);
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.55);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
 scene.add(ambientLight);
 
 const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
@@ -100,7 +100,7 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
 
 
    let trees =  new WorldObjects(terrainGeometry ,terrainWidth);
-console.log(trees)
+    //new ExternalObject(scene, 'res/models/deadBody/sceneReal.gltf', 10, 0, 20, 0)
 
 
 
@@ -109,6 +109,7 @@ console.log(trees)
 
     const terrainMaterial = new TextureSplattingMaterial({
         color: 0x777777,
+        emissive: 0x999999,
         shininess: 0,
         textures: [snowyRockTexture, grassTexture],
         splatMaps: [splatMap]
@@ -149,6 +150,8 @@ let snow = new Snow(terrainWidth, scene);
 let ice = new Ice(terrainWidth, scene);
 let water = new Water(terrainWidth);
 let shark = new Shark(scene)
+
+
 
 
 
