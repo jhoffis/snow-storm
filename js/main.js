@@ -281,9 +281,9 @@ function loop(now) {
 
     if (shark != null && shark.mixer != null){
         shark.mixer.update(delta / 1500)
-    shark.sharkMove()
 }
 
+    shark.sharkMove()
 
 
 

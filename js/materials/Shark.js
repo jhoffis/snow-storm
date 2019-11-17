@@ -23,18 +23,18 @@ class Shark{
 
 
     }
-sharkMove (){
+sharkMove() {
      //let posX = this.object.position.x
 
 
 //console.log(xPos)
         if (this.xPositive <  95){
 
-                this.object.position.x = this.object.position.x + 1
-                this.xPositive = this.xPositive+1
+                this.object.position.x = this.object.position.x + 0.25
+                this.xPositive = this.xPositive+0.25
 
 
-            if (this.xPositive < 2) {
+            if (this.xPositive < 1) {
                this.object.rotate(0, 1.57, 0)
                 console.log("Positive")
             }
@@ -42,10 +42,10 @@ sharkMove (){
 
 
         }else if(this.xNegative < 95){
-                this.object.position.x = this.object.position.x - 1
-        this.xNegative = this.xNegative+1
+                this.object.position.x = this.object.position.x - 0.25
+        this.xNegative = this.xNegative+0.25
 
-            if (this.xNegative < 2) {
+            if (this.xNegative < 1) {
                 this.object.rotate(0, 4.71, 0)
                 console.log("MINUS")
             }
