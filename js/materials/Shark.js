@@ -8,7 +8,7 @@ class Shark{
     constructor(scene) {
         let parent = this;
 
-        this.object = new ExternalObject(scene, 'res/models/shark/scene.gltf', 1, -40, 9, 30,
+        this.object = new ExternalObject(scene, 'res/models/shark/scene.gltf', 1, -40, 4, 30,
             function s() {
                 parent.mixer = new THREE.AnimationMixer(parent.object.gltf.scene);
                 parent.object.gltf.animations.forEach((clip) => {
@@ -39,6 +39,10 @@ sharkMove() {
                 console.log("Positive")
             }
 
+            if (this.object.position.x <-24 && this.object.position.x > -29) {
+                this.object.position.y = this.object.position.y + 0.25
+                console.log("dive")
+            }
 
 
         }else if(this.xNegative < 95){
@@ -49,7 +53,11 @@ sharkMove() {
                 this.object.rotate(0, 4.71, 0)
                 console.log("MINUS")
             }
+            if (this.object.position.x <-24 && this.object.position.x > -29) {
+                this.object.position.y = this.object.position.y -0.25
+                console.log("dive")
             }
+           }
         else {
             this.xPositive = 0;
             this.xNegative = 0
