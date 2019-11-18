@@ -5,6 +5,7 @@ class Character {
     constructor() {
         const cameraFOV = 75;
         this.camera = new THREE.PerspectiveCamera(cameraFOV, window.innerWidth / window.innerHeight, 0.1, 1000);
+        this.camera.position.set(4,0,4);
         scene.add(this.camera)
         this.freecam = false;
         this.velocity = new THREE.Vector3(0.0, 0.0, 0.0);
@@ -91,6 +92,10 @@ class Character {
     }
 
     movement(delta, terrainGeometry) {
+
+        if(terrainGeometry == null)
+            return;
+
         let moveSpeed = this.move.speed * delta;
         let charHeight = this.heightOfCharacter;
         let terrainHeightAtCamera = 0;
@@ -226,12 +231,10 @@ class Character {
         this.camera.position.add(this.velocity);
 
         if (!this.freecam) {
-            if (terrainHeightAtCamera < 200) {
                 this.camera.position.y = terrainHeightAtCamera + charHeight + this.distanceBetweenFeetAndGround + sameHeight;
                 if (this.characterheight - charHeight < terrainHeightAtCamera) {
                     this.camera.position.y = terrainHeightAtCamera + charHeight
                 }
-            }
         }
 
     }

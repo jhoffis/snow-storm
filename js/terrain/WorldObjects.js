@@ -46,14 +46,7 @@ class WorldObjects {
                 }
                 random.y = y1;
 
-                let newTree = new ExternalObject(scene, tree.gltf, 3, random.x, random.y - 0.5, random.z, () => {
-                    newTree.gltf.scene.traverse(function (child) {
-                        if (child.isMesh) {
-                            child.castShadow = true;
-                            child.receiveShadow = true;
-                        }
-                    });
-                });
+                let newTree = new ExternalObject(scene, tree.gltf, 3, random.x, random.y - 0.5, random.z);
 
             }
 

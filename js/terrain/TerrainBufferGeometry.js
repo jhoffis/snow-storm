@@ -116,6 +116,11 @@ class TerrainBufferGeometry extends THREE.PlaneBufferGeometry {
             height = this.calcY(p1, p2, p3, x_precise, z_precise);
         }
 
+        if(Number.isNaN(height)){
+            height = this.getHeightAtCirca(new THREE.Vector3(position.x, 0, position.z));
+        }
+
+
         return height;
     }
 

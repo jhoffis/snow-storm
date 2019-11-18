@@ -19,11 +19,7 @@ class ExternalObject extends THREE.Group {
                 parent.resize(size);
                 parent.position.set(posX, posY, posZ);
 
-                if (typeof actionFunc === "function") {
-                    actionFunc();
-                } else {
-                    console.log("THERE IS NO ACTION FUNCTION USING: " + url)
-                }
+                parent.runAction(actionFunc)
             }, undefined, function (error) {
                 console.error(error);
             });
@@ -32,9 +28,17 @@ class ExternalObject extends THREE.Group {
             this.add(url.scene.clone());
             this.resize(size);
             this.position.set(posX, posY, posZ);
-
+            this.runAction(actionFunc)
         }
 
+    }
+
+    runAction(actionFunc){
+        if (typeof actionFunc === "function") {
+            actionFunc();
+        } else {
+            console.log("THERE IS NO ACTION FUNCTION USING: " + this)
+        }
     }
 
     resize(size) {
@@ -45,22 +49,6 @@ class ExternalObject extends THREE.Group {
         }
     }
 
-    //
-    // position(posX, posY, posZ) {
-    //     if (posX != null && posY != null && posZ != null) {
-    //         this.object.position.set(posX, posY, posZ);
-    //     }
-    //
-    // }
-    //
-    // addPosition(velo){
-    //     if (velo != null) {
-    //         this.object.position.x += velo.x;
-    //         this.object.position.y += velo.y;
-    //         this.object.position.z += velo.z;
-    //     }
-    // }
-    //
     rotate(x, y, z) {
         if (x != null && y != null && z != null) {
             this.rotation.set(x, y, z);
