@@ -291,6 +291,7 @@ function loop(now) {
     // animate cube rotation:
     cube.rotation.x += 0.01;
     cube.rotation.y += 0.01;
+    material.randomColor();
 
     // adding fog
     let fog = new Fog(character, ice);

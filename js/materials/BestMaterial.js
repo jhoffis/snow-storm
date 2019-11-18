@@ -16,38 +16,49 @@ class BestMaterial extends THREE.ShaderMaterial {
         #version 300 es
 
 		precision mediump float;
-        uniform vec3 colorMask;                                                            // Uniform controlling the colorMask
+        uniform vec3 color1;
+        uniform vec3 color2;                                                               // Uniform controlling the colorMask
         
         in vec2 vUv;                                                                  // Receive the texture coordinates from our vertex shader
         out vec4 fColor;
 
 		void main() {
             // vec4 textureColor = texture2D(texture, vUv);                                   // Sample the texture using the coordinates      
-			// gl_FragColor = vec4(colorMask, 1.0);                        // Set the fragment color, applying the colorMask to the texture color.
-            fColor = vec4(colorMask, 1.0);;
+			// gl_FragColor = vec4(color1, 1.0);                        // Set the fragment color, applying the colorMask to the texture color.
+            fColor = vec4(color1, 1.0);
+            // fColor = mix(color1, color2, 1.0);
 		}
 
 	`;
 
+        //Hvor ligger bumpmapping og sånt med terrain.
+        //Mippmapping
+        //how to do peer-to-peer
+
         this.uniforms = {
-            colorMask: {
+            color1: {
                 type: 'c',
                 value: new THREE.Color('#22AAFF'),
             },
+            color2: {
+                type: 'c',
+                value: new THREE.Color('#FF0000'),
+            },
+            time: {
+
+            }
         }
         this.vertexShader = vertexShader;
         this.fragmentShader = fragmentShader;
 
     }
 
-    changeColor(color) {
-        this.uniforms = {
-            colorMask: {
-                type: 'c',
-                value: color,
-            },
-        }
-        this.needsUpdate = true
+    changeColor(r,g,b) {
+        this.uniforms.color1.value = new THREE.Vector3(r,g,b);
         //Update material??
+    }
+
+    randomColor() {
+        this.changeColor(Math.random(), Math.random(), Math.random())
     }
 }
