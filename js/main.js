@@ -3,9 +3,9 @@
 const scene = new THREE.Scene();
 let character = new Character();
 
-const canvas = document.createElement( 'canvas' );
-const context = canvas.getContext( 'webgl2', { alpha: false } );
-const renderer = new THREE.WebGLRenderer( { canvas: canvas, context: context } );
+const canvas = document.createElement('canvas');
+const context = canvas.getContext('webgl2', {alpha: false});
+const renderer = new THREE.WebGLRenderer({canvas: canvas, context: context});
 
 renderer.setClearColor(0xffffff);
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -50,7 +50,7 @@ scene.add(directionalLight);
 
 
 const geometry = new THREE.BoxBufferGeometry(1, 1, 1);
-const material = new THREE.MeshPhongMaterial({color: 0x00ff00});
+const material = new BestMaterial();
 const cube = new THREE.Mesh(geometry, material);
 
 cube.castShadow = true;
@@ -98,11 +98,8 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
     snowyRockTexture.repeat.set(1500 / terrainWidth, 1500 / terrainWidth);
 
 
-
-   let trees =  new WorldObjects(terrainGeometry ,terrainWidth);
+    let trees = new WorldObjects(terrainGeometry, terrainWidth);
     //new ExternalObject(scene, 'res/models/deadBody/sceneReal.gltf', 10, 0, 20, 0)
-
-
 
 
     const splatMap = new THREE.TextureLoader().load('res/images/splatmap_01.png');
@@ -142,7 +139,6 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
     //let tree = new Tree(terrainGeometry, terrainWidth, scene);
 
 
-
 });
 
 // Adding snow and water, where ice is the upper layer of water
@@ -150,12 +146,6 @@ let snow = new Snow(terrainWidth, scene);
 let ice = new Ice(terrainWidth, scene);
 let water = new Water(terrainWidth);
 let shark = new Shark(scene)
-
-
-
-
-
-
 
 
 /**
@@ -276,26 +266,18 @@ window.addEventListener('keyup', (e) => {
 let then = performance.now();
 
 
-
 function loop(now) {
 
     const delta = now - then;
     then = now;
 
-    if (shark != null && shark.mixer != null){
+    if (shark != null && shark.mixer != null) {
         shark.mixer.update(delta / 1500)
-}
-
-    shark.sharkMove()
-
+        shark.sharkMove()
+    }
 
 
-
-
-
-
-
-   // this.object.position.y += velo.y;
+    // this.object.position.y += velo.y;
 
     // update controller rotation.
     character.mouseLookController.update(pitch, yaw);

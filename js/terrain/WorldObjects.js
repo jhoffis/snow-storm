@@ -77,8 +77,8 @@ class WorldObjects {
 
                 //new ExternalObject(scene, 'res/models/tre1/scene.gltf',  1, random.x, random.y, random.z);
                 //new ExternalObject(scene, 'res/models/tre2/scene.gltf',  0.02, random.x, random.y, random.z);
-                new ExternalObject(scene, 'res/models/tre2/scene2.gltf', 3, random.x, random.y, random.z);
-
+            let tree = new ExternalObject(scene, 'res/models/tre2/scene2.gltf', 3, random.x, random.y, random.z);
+            tree.castShadow = true;
 
            // scene.add(cube)
             //console.log(cube.position)
