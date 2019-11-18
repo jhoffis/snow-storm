@@ -98,8 +98,8 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
     snowyRockTexture.repeat.set(1500 / terrainWidth, 1500 / terrainWidth);
 
 
-    let trees = new WorldObjects(terrainGeometry, terrainWidth);
-    new ExternalObject(scene, 'res/models/deadBody/scene.gltf', 2, 0, terrainGeometry.getHeightAtPrecise(new THREE.Vector3(0,0,0)), 0)
+    let trees = new WorldObjects(terrainGeometry, terrainWidth, 25, 2);
+    //new ExternalObject(scene, 'res/models/deadBody/scene.gltf', 2, 0, terrainGeometry.getHeightAtPrecise(new THREE.Vector3(0,0,0)), 0)
 
 
     const splatMap = new THREE.TextureLoader().load('res/images/splatmap_01.png');
