@@ -1,30 +1,39 @@
 "use strict";
 
-class ExternalObject extends THREE.Group{
+class ExternalObject extends THREE.Group {
 
     constructor(scene, url, size, posX, posY, posZ, actionFunc) {
         super();
 
-        scene.add(this);
+        if (scene != null)
+            scene.add(this);
 
         let parent = this;
 
-        let loader = new THREE.GLTFLoader();
-        loader.load(url, function (gltf) {
+        if(typeof url === 'string') {
+            let loader = new THREE.GLTFLoader();
+            loader.load(url, function (gltf) {
 
-            parent.add(gltf.scene);
-            parent.gltf = gltf;
-            parent.resize(size);
-            parent.position.set(posX, posY, posZ);
+                parent.add(gltf.scene);
+                parent.gltf = gltf;
+                parent.resize(size);
+                parent.position.set(posX, posY, posZ);
 
-            if (typeof actionFunc === "function") {
-                actionFunc();
-            } else {
-                console.log("THERE IS NO ACTION FUNCTION USING: " + url)
-            }
-        }, undefined, function (error) {
-            console.error(error);
-        });
+                if (typeof actionFunc === "function") {
+                    actionFunc();
+                } else {
+                    console.log("THERE IS NO ACTION FUNCTION USING: " + url)
+                }
+            }, undefined, function (error) {
+                console.error(error);
+            });
+        } else {
+            this.gltf = url;
+            this.add(url.scene.clone());
+            this.resize(size);
+            this.position.set(posX, posY, posZ);
+
+        }
 
     }
 
@@ -35,6 +44,7 @@ class ExternalObject extends THREE.Group{
             this.scale.z = size
         }
     }
+
     //
     // position(posX, posY, posZ) {
     //     if (posX != null && posY != null && posZ != null) {
@@ -51,7 +61,7 @@ class ExternalObject extends THREE.Group{
     //     }
     // }
     //
-    rotate(x, y, z){
+    rotate(x, y, z) {
         if (x != null && y != null && z != null) {
             this.rotation.set(x, y, z);
         }

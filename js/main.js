@@ -41,8 +41,8 @@ directionalLight.position.set(30, 40, 0);
 directionalLight.castShadow = true;
 
 //Set up shadow properties for the light
-directionalLight.shadow.mapSize.width = 512;  // default
-directionalLight.shadow.mapSize.height = 512; // default
+directionalLight.shadow.mapSize.width = 512 * 2;  // default
+directionalLight.shadow.mapSize.height = 512 * 2; // default
 directionalLight.shadow.camera.near = 0.5;    // default
 directionalLight.shadow.camera.far = 500;     // default
 
@@ -61,6 +61,14 @@ directionalLight.target = cube;
 scene.add(cube);
 
 const terrainWidth = 100;
+
+const d = terrainWidth / 2;
+
+directionalLight.shadow.camera.left = - d;
+directionalLight.shadow.camera.right = d;
+directionalLight.shadow.camera.top = d;
+directionalLight.shadow.camera.bottom = - d;
+
 let terrainGeometry;
 
 /**
@@ -98,8 +106,8 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
     snowyRockTexture.repeat.set(1500 / terrainWidth, 1500 / terrainWidth);
 
 
-    let trees = new WorldObjects(terrainGeometry, terrainWidth, 25, 2);
-    //new ExternalObject(scene, 'res/models/deadBody/scene.gltf', 2, 0, terrainGeometry.getHeightAtPrecise(new THREE.Vector3(0,0,0)), 0)
+    let trees = new WorldObjects(terrainGeometry, terrainWidth, 10, 2, 'res/models/tre2/scene2.gltf');
+    new ExternalObject(scene, 'res/models/deadBody/scene.gltf', 2, 0, terrainGeometry.getHeightAtPrecise(new THREE.Vector3(0,0,0)), 0)
 
 
     const splatMap = new THREE.TextureLoader().load('res/images/splatmap_01.png');

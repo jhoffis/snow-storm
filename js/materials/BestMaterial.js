@@ -34,6 +34,10 @@ class BestMaterial extends THREE.ShaderMaterial {
         //Hvor ligger bumpmapping og sånt med terrain.
         //Mippmapping
         //how to do peer-to-peer
+        // three musts in threejs: renderer, camera, scene
+        // Normal vektor har w som 0.
+        // Quaternion øvvv.
+        // supersamplimg
 
         this.uniforms = {
             color1: {
@@ -44,21 +48,17 @@ class BestMaterial extends THREE.ShaderMaterial {
                 type: 'c',
                 value: new THREE.Color('#FF0000'),
             },
-            time: {
-
-            }
         }
         this.vertexShader = vertexShader;
         this.fragmentShader = fragmentShader;
 
     }
 
-    changeColor(r,g,b) {
+    changeColor1(r,g,b) {
         this.uniforms.color1.value = new THREE.Vector3(r,g,b);
-        //Update material??
     }
 
     randomColor() {
-        this.changeColor(Math.random(), Math.random(), Math.random())
+        this.changeColor1(Math.random(), Math.random(), Math.random())
     }
 }

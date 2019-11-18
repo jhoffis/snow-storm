@@ -86,6 +86,8 @@ class Character {
 
     freeCam() {
         this.freecam = !this.freecam;
+        if(this.freecam)
+            this.move.down = false
     }
 
     movement(delta, terrainGeometry) {
