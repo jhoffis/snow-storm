@@ -15,50 +15,41 @@ class Shark{
                     let clipAction = parent.mixer.clipAction(clip)
                     clipAction.play();
                 });
-
-
-
             }
         );
-
-
     }
-sharkMove() {
-     //let posX = this.object.position.x
+    //95, 0.25
+sharkMove(setDistance, speed) {
+        if (this.xPositive <  setDistance){
 
-
-//console.log(xPos)
-        if (this.xPositive <  95){
-
-                this.object.position.x = this.object.position.x + 0.25
-                this.xPositive = this.xPositive+0.25
+                this.object.position.x = this.object.position.x + speed
+                this.xPositive = this.xPositive+speed
 
 
             if (this.xPositive < 1) {
-               this.object.rotate(0, 1.57, 0)
-                console.log("Positive")
+               this.object.rotate(0, Math.PI/2, 0)
             }
-
+            //Dive
             if (this.object.position.x <-24 && this.object.position.x > -29) {
-                this.object.position.y = this.object.position.y + 0.25
-                console.log("dive")
+                this.object.position.y = this.object.position.y + speed
             }
 
 
-        }else if(this.xNegative < 95){
-                this.object.position.x = this.object.position.x - 0.25
-        this.xNegative = this.xNegative+0.25
+        }else if(this.xNegative < setDistance){
+                this.object.position.x = this.object.position.x - speed;
+        this.xNegative = this.xNegative+speed;
 
             if (this.xNegative < 1) {
-                this.object.rotate(0, 4.71, 0)
+                this.object.rotate(0, Math.PI+(Math.PI/2), 0)
                 console.log("MINUS")
             }
+            //Undive
             if (this.object.position.x <-24 && this.object.position.x > -29) {
-                this.object.position.y = this.object.position.y -0.25
-                console.log("dive")
+                this.object.position.y = this.object.position.y -0.25;
             }
            }
         else {
+            //Start over again
             this.xPositive = 0;
             this.xNegative = 0
         }

@@ -2,11 +2,6 @@ class WorldObjects {
 
     constructor(terrainGeometry, width) {
 
-
-        /*  let a1 = new ExternalObject(scene, 'res/models/tre1/scene.gltf', 0.5, -9, y1, 0);
-
-          new ExternalObject(scene, 'res/models/tre2/scene.gltf',0.02, -10, 15, -10 );
-  */     // console.log(random)
         for (let i = 0; i < 10; i++) {
 
             let random = new THREE.Vector3(Math.random() * width - width / 2, 0, Math.random() * width - width / 2);
