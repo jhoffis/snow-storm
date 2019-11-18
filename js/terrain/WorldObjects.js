@@ -1,8 +1,8 @@
 class WorldObjects {
 
-    constructor(terrainGeometry, width, numberOfObjectsToCreate, distanceSteepnessFactor) {
+    constructor(terrainGeometry, width, numberOfObjectsToCreate, distanceSteepnessFactor, url, size) {
 
-        let tree = new ExternalObject(null, 'res/models/tre2/scene2.gltf', 3, 0, 0, 0, () => {
+        let tree = new ExternalObject(null, url, 3, 0, 0, 0, () => {
             tree.gltf.scene.traverse(function (child) {
                 if (child.isMesh) {
                     child.castShadow = true;
@@ -46,7 +46,7 @@ class WorldObjects {
                 }
                 random.y = y1;
 
-                let newTree = new ExternalObject(scene, tree.gltf, 3, random.x, random.y - 0.5, random.z);
+                let newTree = new ExternalObject(scene, tree.gltf, size, random.x, random.y - 0.5, random.z);
 
             }
 

@@ -41,7 +41,6 @@ sharkMove(setDistance, speed) {
 
             if (this.xNegative < 1) {
                 this.object.rotate(0, Math.PI+(Math.PI/2), 0)
-                console.log("MINUS")
             }
             //Undive
             if (this.object.position.x <-24 && this.object.position.x > -29) {

@@ -106,8 +106,7 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
     snowyRockTexture.repeat.set(1500 / terrainWidth, 1500 / terrainWidth);
 
 
-    let trees = new WorldObjects(terrainGeometry, terrainWidth, 10, 2, 'res/models/tre2/scene2.gltf');
-    new ExternalObject(scene, 'res/models/deadBody/scene.gltf', 2, 0, terrainGeometry.getHeightAtPrecise(new THREE.Vector3(0,0,0)), 0)
+    let trees = new WorldObjects(terrainGeometry, terrainWidth, 50, 2, 'res/models/tre2/scene2.gltf', 3);
 
 
     const splatMap = new THREE.TextureLoader().load('res/images/splatmap_01.png');
@@ -127,24 +126,6 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
 
     scene.add(terrain);
 
-//MIDLERTIDIG SKYBOX --FUNKER, men kan gjøres bedre
-    /*
-    const loader = new CubeTextureLoader();
-    const texturesky = loader.load([
-        'res/textures/iceflats_ft.png',
-        'res/textures/iceflats_bk.png',
-        'res/textures/iceflats_up.png',
-        'res/textures/iceflats_dn.png',
-        'res/textures/iceflats_rt.png',
-        'res/textures/iceflats_lf.png'
-    ]);
-    scene.background = texturesky;
-
-     */
-
-
-    // Gjenstående ting av Sondre sine trær, om nødvendig
-    //let tree = new Tree(terrainGeometry, terrainWidth, scene);
 
 
 });
@@ -281,7 +262,7 @@ function loop(now) {
 
     if (shark != null && shark.mixer != null) {
         shark.mixer.update(delta / 1500);
-        shark.sharkMove(95, 0.25);
+        shark.sharkMove(95, 0.1);
     }
 
 
