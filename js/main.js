@@ -152,7 +152,7 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
 let snow = new Snow(terrainWidth, scene);
 let ice = new WaterReflector(terrainWidth, scene);
 let water = new Water(terrainWidth);
-let shark = new Shark(scene)
+let shark = new Shark(scene);
 
 
 /**

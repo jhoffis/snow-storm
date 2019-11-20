@@ -25,8 +25,8 @@ class BestMaterial extends THREE.ShaderMaterial {
 		void main() {
             // vec4 textureColor = texture2D(texture, vUv);                                   // Sample the texture using the coordinates      
 			// gl_FragColor = vec4(color1, 1.0);                        // Set the fragment color, applying the colorMask to the texture color.
-            fColor = vec4(color1, 1.0);
-            // fColor = mix(color1, color2, 1.0);
+            // fColor = vec4(color1, 1.0);
+            fColor = vec4(mix(color1, color2, 0.5), 1.0);
 		}
 
 	`;
