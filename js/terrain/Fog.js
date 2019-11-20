@@ -3,15 +3,17 @@
 class Fog {
     constructor(character, water) {
         let fog = null;
-        const near = 10;
+        const near = 20;
         const far = 40;
+        const uwnear = 2;
+        const uwfar = 10;
 
         if (character.characterheight > water.waterHeight) {
             // Fog for above waterlevel
             fog = new THREE.Fog(0xD6D7D2, near, far);
         } else {
             // Fog for the "waterfog"
-            fog = new THREE.FogExp2(0x75c7d2, 0.15);
+            fog = new THREE.Fog(0x75c7d2, uwnear, uwfar);
             /*
             Other possible colors:
             2ABCB2
