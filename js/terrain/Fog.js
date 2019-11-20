@@ -5,7 +5,7 @@ class Fog {
         let fog = null;
         if (character.characterheight > water.waterHeight) {
             // Fog for above waterlevel
-            fog = new THREE.FogExp2(0xD6D7D2, 0.025);
+            fog = new THREE.FogExp2(0xD6D7D2, 0.003);
         } else {
             // Fog for the "waterfog"
             fog = new THREE.FogExp2(0x75c7d2, 0.15);
