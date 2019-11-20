@@ -107,7 +107,6 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
 
 
     let trees = new WorldObjects(terrainGeometry, terrainWidth, 10, 2, 'res/models/tre2/scene2.gltf');
-    // new ExternalObject(scene, 'res/models/deadBody/scene.gltf', 2, 0, terrainGeometry.getHeightAtPrecise(new THREE.Vector3(0,0,0)), 0)
 
 
     const splatMap = new THREE.TextureLoader().load('res/images/splatmap_01.png');
@@ -281,7 +280,7 @@ function loop(now) {
 
     if (shark != null && shark.mixer != null) {
         shark.mixer.update(delta / 1500);
-        shark.sharkMove(95, 0.25);
+        shark.sharkMove(95, 0.1);
     }
 
 
