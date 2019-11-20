@@ -4,7 +4,7 @@ class Water{
     constructor (terrainWidth) {
 
 
-        let geo = new THREE.PlaneBufferGeometry(terrainWidth, terrainWidth, 8, 8);
+        let geo = new THREE.PlaneBufferGeometry(terrainWidth*2, terrainWidth*2, 8, 8);
         const water = new THREE.TextureLoader().load('res/textures/water_02.jpg');
         let mat = new THREE.MeshBasicMaterial({map: water, side: THREE.DoubleSide,transparent: true, opacity: 0.4});
 
