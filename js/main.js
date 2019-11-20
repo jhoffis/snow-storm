@@ -106,7 +106,7 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
     snowyRockTexture.repeat.set(1500 / terrainWidth, 1500 / terrainWidth);
 
 
-    let trees = new WorldObjects(terrainGeometry, terrainWidth, 25, 2, 'res/models/tre2/scene2.gltf', 3);
+    let trees = new WorldObjects(terrainGeometry, terrainWidth, 10, 0, 'res/models/tre2/scene2.gltf', 3);
 
 
     const splatMap = new THREE.TextureLoader().load('res/images/splatmap_01.png');
@@ -303,6 +303,7 @@ function loop(now) {
     // adding fog
     let fog = new Fog(character, ice);
     scene.fog = fog;
+   // console.log(character.characterheight)
 
     snow.fall(1, character.camera);
     // render scene:
