@@ -38,14 +38,14 @@ class Snow {
 
     fall(speed, camera) {
 
-        this.snows.forEach(p => {
+        this.snows.forEach(snow => {
 
-            p.lookAt(camera.position);
-            p.velocity = -0.1 + Math.random() * 0.1;
-            p.position.y += p.velocity;
-            if (p.position.y < 0 && Math.random() > 0.97) {
-                p.position.y = 40;
-                p.velocity = 0;
+            snow.lookAt(camera.position);
+            snow.velocity = -0.1 + Math.random() * 0.1;
+            snow.position.y += snow.velocity;
+            if (snow.position.y < 0 && Math.random() > 0.97) {
+                snow.position.y = 40;
+                snow.velocity = 0;
             }
 
         });

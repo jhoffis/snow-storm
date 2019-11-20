@@ -1,6 +1,6 @@
 "use strict";
 
-class Ice {
+class WaterReflector {
 
 
     constructor(terrainWidth, scene) {

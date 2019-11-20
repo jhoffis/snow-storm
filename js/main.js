@@ -107,7 +107,7 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
 
 
     let trees = new WorldObjects(terrainGeometry, terrainWidth, 10, 2, 'res/models/tre2/scene2.gltf');
-    new ExternalObject(scene, 'res/models/deadBody/scene.gltf', 2, 0, terrainGeometry.getHeightAtPrecise(new THREE.Vector3(0,0,0)), 0)
+    // new ExternalObject(scene, 'res/models/deadBody/scene.gltf', 2, 0, terrainGeometry.getHeightAtPrecise(new THREE.Vector3(0,0,0)), 0)
 
 
     const splatMap = new THREE.TextureLoader().load('res/images/splatmap_01.png');
@@ -151,7 +151,7 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
 
 // Adding snow and water, where ice is the upper layer of water
 let snow = new Snow(terrainWidth, scene);
-let ice = new Ice(terrainWidth, scene);
+let ice = new WaterReflector(terrainWidth, scene);
 let water = new Water(terrainWidth);
 let shark = new Shark(scene)
 
