@@ -44,7 +44,7 @@ sharkMove(setDistance, speed) {
             }
             //Undive
             if (this.object.position.x <-24 && this.object.position.x > -29) {
-                this.object.position.y = this.object.position.y -0.25;
+                this.object.position.y = this.object.position.y -speed;
             }
            }
         else {
