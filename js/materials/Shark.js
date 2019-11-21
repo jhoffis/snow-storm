@@ -8,7 +8,7 @@ class Shark{
     constructor(scene) {
         let parent = this;
 
-        this.object = new ExternalObject(scene, 'res/models/shark/scene.gltf', 1, -40, 4, 30,
+        this.object = new ExternalObject(scene, 'res/models/shark/scene.gltf', 1, -40, 4, 27,
             function s() {
                 parent.mixer = new THREE.AnimationMixer(parent.object.gltf.scene);
                 parent.object.gltf.animations.forEach((clip) => {
