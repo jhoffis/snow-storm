@@ -8,7 +8,7 @@ class WaterReflector {
         let waterSize = 2000;
         let waterGeometry = new THREE.PlaneBufferGeometry(terrainWidth, terrainWidth);
         let water = new Water_S(waterGeometry, {
-            color: 0xffffff,
+            color: 0x9DF2DB, //9DF2DB og ffffff
             scale: 4,
             textureWidth: 1024,
             textureHeight: 1024,

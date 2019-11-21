@@ -24,7 +24,7 @@ class Fog {
             fog = new THREE.Fog(0xD6D7D2, this.near, this.far);
         } else {
             // Fog for the "waterfog"
-            fog = new THREE.Fog(0x75c7d2, this.uwnear, this.uwfar);
+            fog = new THREE.Fog(0x9DF2DB, this.uwnear, this.uwfar);
             /*
             Other possible colors:
             2ABCB2
@@ -33,6 +33,7 @@ class Fog {
             61a9e8
             75c7bd
             75c7d2
+            #9DF2DB
              */
         }
         return fog;
