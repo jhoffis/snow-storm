@@ -1,19 +1,30 @@
 "use strict";
 
 class Fog {
-    constructor(character, water) {
-        let fog = null;
-        const near = 20;
-        const far = 40;
-        const uwnear = 2;
-        const uwfar = 10;
 
-        if (character.characterheight > water.waterHeight) {
+    constructor(water) {
+        this.near = 10;
+        this.far = 40;
+        this.charHeight = character.characterheight;
+        this.uwnear = 2;
+        this.uwfar = 10;
+    }
+
+    change(scene, character) {
+        this.charHeight = character.characterheight;
+        scene.fog = this.getFog();
+    }
+
+
+    getFog() {
+        let fog;
+
+        if (ice != null && this.charHeight > ice.waterHeight) {
             // Fog for above waterlevel
-            fog = new THREE.Fog(0xD6D7D2, near, far);
+            fog = new THREE.Fog(0xD6D7D2, this.near, this.far);
         } else {
             // Fog for the "waterfog"
-            fog = new THREE.Fog(0x75c7d2, uwnear, uwfar);
+            fog = new THREE.Fog(0x75c7d2, this.uwnear, this.uwfar);
             /*
             Other possible colors:
             2ABCB2
@@ -25,6 +36,5 @@ class Fog {
              */
         }
         return fog;
-
     }
 }

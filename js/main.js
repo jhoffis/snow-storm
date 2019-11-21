@@ -64,10 +64,10 @@ const terrainWidth = 100;
 
 const d = terrainWidth / 2;
 
-directionalLight.shadow.camera.left = - d;
+directionalLight.shadow.camera.left = -d;
 directionalLight.shadow.camera.right = d;
 directionalLight.shadow.camera.top = d;
-directionalLight.shadow.camera.bottom = - d;
+directionalLight.shadow.camera.bottom = -d;
 
 let terrainGeometry;
 
@@ -153,6 +153,8 @@ let snow = new Snow(terrainWidth, scene);
 let ice = new WaterReflector(terrainWidth, scene);
 let water = new Water(terrainWidth);
 let shark = new Shark(scene);
+let fog = new Fog(character, ice);
+let checkFog = true;
 
 
 /**
@@ -210,6 +212,9 @@ window.addEventListener('keydown', (e) => {
         e.preventDefault();
     } else if (e.keyCode === 16) {
         character.move.run = true;
+        e.preventDefault();
+    } else if (e.keyCode === 81) {
+        checkFog = !checkFog;
         e.preventDefault();
     }
 
@@ -300,10 +305,14 @@ function loop(now) {
     cube.rotation.y += 0.01;
     material.randomColor();
 
-    // adding fog
-    let fog = new Fog(character, ice);
-    scene.fog = fog;
-   // console.log(character.characterheight)
+    character.characterheight
+    if (checkFog)
+        fog.change(scene, character)
+    else
+        scene.fog = null;
+
+
+    // console.log(character.characterheight)
 
     snow.fall(1, character.camera);
     // render scene:
