@@ -19,7 +19,7 @@ for (let i = 0; i < 6; i++)
     materialArray[i].side = THREE.BackSide;
 
 let skyboxGeo = new THREE.BoxGeometry( 1000, 1000, 1000);
-//For å justere posisjonen til skyboxen (ser ikke helt bra ut per nå)
+//For å justere posisjonen til skyboxen
 //skyboxGeo.translate( 0, 1000/2, 0 );
 
 let skybox = new THREE.Mesh( skyboxGeo, materialArray );

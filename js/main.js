@@ -90,9 +90,6 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
         height: 30
     });
 
-    // const terrainMaterial = new MeshPhongMaterial({
-    //     color: 0x777777
-    // });
 
 
     const grassTexture = new THREE.TextureLoader().load('res/textures/snow_02.jpg');
@@ -126,24 +123,8 @@ Utilities.loadImage('res/images/heightmap.png').then((heightmapImage) => {
 
     scene.add(terrain);
 
-//MIDLERTIDIG SKYBOX --FUNKER, men kan gjøres bedre
-    /*
-    const loader = new CubeTextureLoader();
-    const texturesky = loader.load([
-        'res/textures/iceflats_ft.png',
-        'res/textures/iceflats_bk.png',
-        'res/textures/iceflats_up.png',
-        'res/textures/iceflats_dn.png',
-        'res/textures/iceflats_rt.png',
-        'res/textures/iceflats_lf.png'
-    ]);
-    scene.background = texturesky;
-
-     */
 
 
-    // Gjenstående ting av Sondre sine trær, om nødvendig
-    //let tree = new Tree(terrainGeometry, terrainWidth, scene);
 
 
 });
@@ -249,30 +230,7 @@ window.addEventListener('keyup', (e) => {
 });
 
 
-// // instantiate a loader
-// const loader = new OBJLoader();
 
-// // load a resource
-// loader.load(
-//     // resource URL
-//     'resources/models/sofa.obj',
-//     // called when resource is loaded
-//     function (object) {
-//         scene.add(object);
-//     },
-//     // called when loading is in progresses
-//     function (xhr) {
-
-//         console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-
-//     },
-//     // called when loading has errors
-//     function (error) {
-
-//         console.log('An error happened');
-
-//     }
-// );
 
 
 let then = performance.now();
@@ -289,7 +247,7 @@ function loop(now) {
     }
 
 
-    // this.object.position.y += velo.y;
+
 
     // update controller rotation.
     character.mouseLookController.update(pitch, yaw);
@@ -312,7 +270,7 @@ function loop(now) {
         scene.fog = null;
 
 
-    // console.log(character.characterheight)
+
 
     snow.fall(1, character.camera);
     // render scene:
@@ -321,11 +279,6 @@ function loop(now) {
     requestAnimationFrame(loop);
 
 };
-//Gun
-//var axesHelper = new THREE.AxesHelper(5);
-//scene.add(axesHelper);
 
-//Trestubbe
 
-//new WorldObjects();
 loop(performance.now());

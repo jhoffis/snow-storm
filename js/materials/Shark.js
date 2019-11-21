@@ -18,7 +18,7 @@ class Shark{
             }
         );
     }
-    //95, 0.25
+
 sharkMove(setDistance, speed) {
         if (this.xPositive <  setDistance){
 
@@ -52,11 +52,6 @@ sharkMove(setDistance, speed) {
             this.xPositive = 0;
             this.xNegative = 0
         }
-
-
-
-
-    //console.log(this.object.position.x)
 }
 
 }
