@@ -7,7 +7,7 @@ class Fog {
         this.far = 40;
         this.charHeight = character.characterheight;
         this.uwnear = 2;
-        this.uwfar = 10;
+        this.uwfar = 5;
     }
 
     change(scene, character) {
